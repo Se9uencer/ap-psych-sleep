@@ -1,0 +1,3672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AP Psychology Final Project — The Psychology of Sleep. An interactive science editorial exploring sleep stages, memory, mental health, disorders, and CBT-I treatments.">
+  <title>The Psychology of Sleep — AP Psychology Final Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       1. CSS CUSTOM PROPERTIES
+       ============================================================ */
+    :root {
+      --c-navy:      #0a0f2e;
+      --c-purple:    #2d1b69;
+      --c-lavender:  #c8b8ff;
+      --c-off-white: #f4f0ff;
+      --c-gold:      #ffd166;
+      --c-card:      #1a1f3c;
+      --c-dark:      #0d1117;
+
+      --c-lavender-10: rgba(200,184,255,0.10);
+      --c-lavender-15: rgba(200,184,255,0.15);
+      --c-lavender-20: rgba(200,184,255,0.20);
+      --c-lavender-40: rgba(200,184,255,0.40);
+      --c-gold-10:     rgba(255,209,102,0.10);
+      --c-gold-20:     rgba(255,209,102,0.20);
+      --c-white-03:    rgba(255,255,255,0.03);
+      --c-white-05:    rgba(255,255,255,0.05);
+      --c-white-08:    rgba(255,255,255,0.08);
+
+      --glass-bg:     rgba(255,255,255,0.05);
+      --glass-border: 1px solid rgba(200,184,255,0.15);
+      --glass-blur:   blur(12px);
+
+      --glow-sm:   0 0 20px rgba(200,184,255,0.08);
+      --glow-md:   0 0 30px rgba(200,184,255,0.12);
+      --glow-lg:   0 0 50px rgba(200,184,255,0.20);
+      --glow-gold: 0 0 30px rgba(255,209,102,0.20);
+
+      --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+
+      --section-pad-v: 110px;
+      --section-pad-h: clamp(20px,5vw,80px);
+      --max-w: 1160px;
+
+      --ease:      0.3s ease;
+      --ease-slow: 0.6s ease;
+      --nav-h:     68px;
+    }
+
+    /* ============================================================
+       2. RESET & BASE
+       ============================================================ */
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; font-size:16px; -webkit-text-size-adjust:100%; scroll-padding-top:var(--nav-h); }
+    body { background-color:var(--c-navy); color:var(--c-off-white); font-family:var(--font-sans); font-size:1.05rem; line-height:1.85; overflow-x:hidden; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:var(--c-dark); }
+    ::-webkit-scrollbar-thumb { background:var(--c-lavender-40); border-radius:3px; }
+    ::-webkit-scrollbar-thumb:hover { background:var(--c-lavender); }
+
+    /* ============================================================
+       3. GLOBAL TYPOGRAPHY
+       ============================================================ */
+    h1,h2,h3,h4,h5,h6 { font-family:var(--font-serif); line-height:1.15; color:var(--c-off-white); }
+    h1 { font-size:clamp(2.6rem,6vw,4.8rem);    font-weight:900; }
+    h2 { font-size:clamp(1.9rem,4vw,2.6rem);    font-weight:700; }
+    h3 { font-size:clamp(1.15rem,2.5vw,1.5rem); font-weight:700; }
+    h4 { font-size:1.05rem; font-weight:600; }
+    p            { margin-bottom:1.1em; }
+    p:last-child { margin-bottom:0; }
+    strong       { color:var(--c-lavender); font-weight:600; }
+    em           { font-style:italic; color:rgba(244,240,255,0.85); }
+    a            { color:var(--c-lavender); text-decoration:none; transition:color var(--ease); }
+    a:hover      { color:var(--c-gold); }
+    ul,ol        { padding-left:1.4em; }
+    li           { margin-bottom:0.35em; }
+
+    /* ============================================================
+       4. LAYOUT UTILITIES
+       ============================================================ */
+    .section-shell { padding:var(--section-pad-v) var(--section-pad-h); }
+    .container     { max-width:var(--max-w); margin-inline:auto; }
+    .bg-navy       { background-color:var(--c-navy); }
+    .bg-dark       { background-color:var(--c-dark); }
+    .eyebrow { display:inline-block; font-family:var(--font-sans); font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--c-gold); margin-bottom:14px; }
+    .section-title { margin-bottom:14px; }
+    .section-lead  { font-size:1.1rem; color:rgba(244,240,255,.72); max-width:680px; margin-bottom:64px; line-height:1.75; }
+
+    /* ============================================================
+       5. GLASS CARD
+       ============================================================ */
+    .glass-card { background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); border:var(--glass-border); border-radius:16px; box-shadow:var(--glow-md); }
+
+    /* ============================================================
+       6. REVEAL
+       ============================================================ */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease,transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ============================================================
+       7. WAVE DIVIDER
+       ============================================================ */
+    .wave-divider { display:block; line-height:0; overflow:hidden; }
+    .wave-divider svg { display:block; width:100%; }
+
+    /* ============================================================
+       8. BUTTONS & TABS
+       ============================================================ */
+    .btn-glow { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 36px; border-radius:50px; border:1px solid var(--c-lavender-20); background:linear-gradient(135deg,var(--c-purple),#3d2485); color:var(--c-off-white); font-family:var(--font-sans); font-size:.95rem; font-weight:600; letter-spacing:.04em; cursor:pointer; transition:transform var(--ease),box-shadow var(--ease); box-shadow:0 0 28px rgba(200,184,255,.18),0 4px 18px rgba(0,0,0,.35); text-decoration:none; }
+    .btn-glow:hover { transform:translateY(-3px); box-shadow:0 0 48px rgba(200,184,255,.35),0 8px 28px rgba(0,0,0,.45); color:#fff; }
+    .btn-glow:focus-visible { outline:2px solid var(--c-lavender); outline-offset:3px; }
+    .tab-btn { padding:9px 18px; border-radius:8px; border:1px solid var(--c-lavender-15); background:transparent; color:rgba(244,240,255,.55); font-family:var(--font-sans); font-size:.88rem; font-weight:500; cursor:pointer; transition:all var(--ease); white-space:nowrap; }
+    .tab-btn:hover  { border-color:var(--c-lavender-40); color:var(--c-lavender); }
+    .tab-btn.active { background:var(--c-lavender-20); border-color:var(--c-lavender); color:var(--c-lavender); font-weight:600; }
+
+    /* ============================================================
+       9. DATA TABLE
+       ============================================================ */
+    .data-table { width:100%; border-collapse:collapse; font-size:.9rem; }
+    .data-table thead th { background:rgba(200,184,255,.10); color:var(--c-lavender); padding:13px 18px; text-align:left; font-family:var(--font-sans); font-weight:600; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; border-bottom:1px solid var(--c-lavender-15); }
+    .data-table tbody td { padding:12px 18px; border-bottom:1px solid rgba(200,184,255,.05); color:rgba(244,240,255,.82); vertical-align:middle; }
+    .data-table tbody tr:last-child td { border-bottom:none; }
+    .data-table tbody tr:hover td { background:rgba(255,255,255,.025); }
+    .table-wrapper { border:1px solid var(--c-lavender-15); border-radius:14px; overflow:hidden; box-shadow:var(--glow-md); }
+
+    /* ============================================================
+       10. BADGES
+       ============================================================ */
+    .badge { display:inline-block; font-size:.65rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; padding:3px 9px; border-radius:4px; }
+    .badge-book     { background:var(--c-gold-20);       color:var(--c-gold); }
+    .badge-meta     { background:var(--c-lavender-20);   color:var(--c-lavender); }
+    .badge-govt     { background:rgba(249,115,22,.18);   color:#fb923c; }
+    .badge-clinical { background:rgba(74,222,128,.15);   color:#4ade80; }
+    .badge-review   { background:rgba(126,184,247,.18);  color:#7eb8f7; }
+
+    /* ============================================================
+       11. KEYFRAMES
+       ============================================================ */
+    @keyframes fadeUp         { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes shimmer        { 0%{background-position:0% center} 100%{background-position:200% center} }
+    @keyframes pulse-ring     { 0%,100%{transform:scale(1);opacity:.35} 50%{transform:scale(1.18);opacity:.12} }
+    @keyframes float          { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-14px) rotate(2deg)} }
+    @keyframes twinkle        { 0%,100%{opacity:var(--op-min,.1);transform:scale(1)} 50%{opacity:var(--op-max,.8);transform:scale(1.3)} }
+    @keyframes underline-grow { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+    @keyframes flow-dash      { to{stroke-dashoffset:-20} }
+    @keyframes blink-out      { 0%,78%,100%{opacity:0} 80%,96%{opacity:.85} }
+    @keyframes spin-slow      { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes bounce-arrow   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    @keyframes card-glow-pulse{ 0%,100%{box-shadow:0 0 18px rgba(200,184,255,.08)} 50%{box-shadow:0 0 32px rgba(200,184,255,.22)} }
+    @keyframes draw-line      { from{stroke-dashoffset:var(--dash-len,1000)} to{stroke-dashoffset:0} }
+    @keyframes ripple-out     { from{r:6;opacity:.6} to{r:18;opacity:0} }
+
+    /* ============================================================
+       12. PROGRESS BAR
+       ============================================================ */
+    #progress-bar { position:fixed; top:0; left:0; width:0%; height:3px; background:linear-gradient(90deg,var(--c-lavender),var(--c-gold),var(--c-lavender)); background-size:200% 100%; animation:shimmer 3s linear infinite; z-index:9999; transition:width .1s linear; pointer-events:none; }
+
+    /* ============================================================
+       13. NAVBAR
+       ============================================================ */
+    #navbar { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--nav-h); display:flex; align-items:center; padding:0 clamp(20px,4vw,60px); transition:background var(--ease),box-shadow var(--ease); }
+    #navbar.scrolled { background:rgba(10,15,46,.80); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); box-shadow:0 1px 0 rgba(200,184,255,.12),0 4px 24px rgba(0,0,0,.3); }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; width:100%; max-width:var(--max-w); margin-inline:auto; }
+    .nav-logo  { font-family:var(--font-serif); font-size:1.05rem; font-weight:700; color:var(--c-lavender); letter-spacing:.01em; text-decoration:none; flex-shrink:0; transition:color var(--ease); }
+    .nav-logo:hover { color:var(--c-gold); }
+    .nav-links { display:flex; align-items:center; gap:4px; list-style:none; padding:0; margin:0; }
+    .nav-links a { display:block; padding:6px 13px; border-radius:20px; font-size:.84rem; font-weight:500; color:rgba(244,240,255,.62); text-decoration:none; transition:color var(--ease),background var(--ease); }
+    .nav-links a:hover  { color:var(--c-lavender); background:var(--c-lavender-10); }
+    .nav-links a.active { color:var(--c-lavender); background:var(--c-lavender-15); font-weight:600; }
+    .nav-hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:40px; height:40px; padding:8px; background:none; border:none; cursor:pointer; border-radius:8px; transition:background var(--ease); flex-shrink:0; }
+    .nav-hamburger:hover { background:var(--c-lavender-10); }
+    .nav-hamburger:focus-visible { outline:2px solid var(--c-lavender); outline-offset:2px; }
+    .nav-hamburger span { display:block; width:22px; height:2px; background:var(--c-lavender); border-radius:2px; transition:transform var(--ease),opacity var(--ease); transform-origin:center; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* ============================================================
+       14. MOBILE NAV
+       ============================================================ */
+    #mobile-nav { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; position:fixed; inset:0; background:rgba(8,12,36,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); z-index:999; padding:80px 40px 40px; opacity:0; pointer-events:none; transition:opacity .35s ease; }
+    #mobile-nav.open { opacity:1; pointer-events:all; }
+    .mobile-nav-link { font-family:var(--font-serif); font-size:clamp(1.5rem,5vw,2rem); font-weight:700; color:rgba(244,240,255,.80); text-decoration:none; padding:12px 28px; border-radius:12px; width:100%; text-align:center; transition:color var(--ease),background var(--ease); }
+    .mobile-nav-link:hover { color:var(--c-lavender); background:var(--c-lavender-10); }
+    .mobile-nav-divider { width:40px; height:1px; background:var(--c-lavender-20); margin:8px auto; }
+
+    /* ============================================================
+       15. HERO
+       ============================================================ */
+    #hero { position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 60px) var(--section-pad-h) 0; overflow:hidden; background:var(--c-navy); }
+    #hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(45,27,105,.75) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 60%,rgba(200,184,255,.05) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 20% 80%,rgba(45,27,105,.2) 0%,transparent 60%); pointer-events:none; z-index:0; }
+    #hero-particles { position:absolute; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+    .star { position:absolute; border-radius:50%; background:#fff; animation:twinkle var(--dur,4s) var(--delay,0s) ease-in-out infinite; }
+    #hero-moon { position:absolute; top:clamp(90px,12vh,130px); right:clamp(30px,8vw,120px); z-index:2; animation:float 9s ease-in-out infinite; pointer-events:none; }
+    #hero-parallax { position:absolute; inset:-20%; pointer-events:none; z-index:0; will-change:transform; }
+    .hero-content { position:relative; z-index:3; max-width:860px; margin-inline:auto; }
+    .hero-eyebrow { display:inline-block; font-size:.72rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--c-gold); margin-bottom:22px; opacity:0; animation:fadeUp .7s .1s ease forwards; }
+    .hero-title { margin-bottom:28px; background:linear-gradient(120deg,#ffffff 0%,var(--c-lavender) 40%,var(--c-gold) 70%,#ffffff 100%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 7s linear infinite,fadeUp .8s .25s ease both; }
+    .hero-subhead { font-size:clamp(1rem,2.2vw,1.2rem); font-style:italic; color:rgba(244,240,255,.68); max-width:660px; margin:0 auto 52px; line-height:1.7; opacity:0; animation:fadeUp .8s .4s ease forwards; }
+    .hero-stats { display:flex; gap:clamp(24px,5vw,60px); justify-content:center; flex-wrap:wrap; margin-bottom:52px; opacity:0; animation:fadeUp .8s .6s ease forwards; }
+    .stat-item { text-align:center; }
+    .stat-number { display:block; font-family:var(--font-serif); font-size:clamp(3rem,7vw,5.2rem); font-weight:900; color:var(--c-gold); line-height:1; letter-spacing:-.02em; text-shadow:0 0 40px rgba(255,209,102,.35); }
+    .stat-label  { display:block; font-size:.82rem; color:rgba(244,240,255,.60); margin-top:8px; max-width:150px; margin-inline:auto; line-height:1.4; }
+    .stat-source { display:block; font-size:.65rem; color:rgba(244,240,255,.30); margin-top:4px; letter-spacing:.04em; }
+    .stat-sep    { width:1px; height:60px; background:var(--c-lavender-20); align-self:center; }
+    .hero-cta-row { opacity:0; animation:fadeUp .8s .8s ease forwards; }
+    .hero-cta { font-size:1rem; padding:16px 44px; box-shadow:0 0 40px rgba(200,184,255,.25),0 6px 24px rgba(0,0,0,.4); }
+    .hero-cta:hover { box-shadow:0 0 64px rgba(200,184,255,.45),0 10px 32px rgba(0,0,0,.5); }
+    .scroll-hint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; z-index:3; opacity:0; animation:fadeUp .8s 1.2s ease forwards; }
+    .scroll-hint span { font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(244,240,255,.30); }
+    .scroll-arrow { width:18px; height:18px; border-right:2px solid rgba(200,184,255,.35); border-bottom:2px solid rgba(200,184,255,.35); transform:rotate(45deg); animation:bounce-arrow 2s ease-in-out infinite; }
+
+    /* ============================================================
+       16. SCIENCE SECTION
+       ============================================================ */
+    #science { background:var(--c-dark); }
+
+    /* --- Two-Process Model --- */
+    .two-process-wrap {
+      margin-bottom: 80px;
+    }
+    .two-process-header {
+      margin-bottom: 10px;
+    }
+    .two-process-header h3 { color:var(--c-off-white); margin-bottom:8px; }
+    .two-process-header p  { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:20px; }
+
+    .canvas-shell {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--c-lavender-15);
+      border-radius: 14px;
+      padding: 16px 16px 8px;
+      box-shadow: var(--glow-md);
+      overflow: hidden;
+    }
+    #two-process-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .two-process-legend {
+      display: flex;
+      gap: 28px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+      padding: 0 4px 8px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .82rem;
+      color: rgba(244,240,255,.70);
+    }
+    .legend-swatch {
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* --- Sleep Stage Cycle Bar --- */
+    .stage-cycle-wrap { margin-bottom: 80px; }
+    .stage-cycle-wrap h3 { color:var(--c-off-white); margin-bottom:8px; }
+    .stage-cycle-wrap > p { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:24px; }
+
+    .stage-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: .72rem;
+      color: rgba(244,240,255,.35);
+      margin-bottom: 6px;
+      letter-spacing: .06em;
+    }
+
+    .stage-bar {
+      display: flex;
+      height: 64px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--glow-md);
+      margin-bottom: 16px;
+    }
+
+    .stage-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      cursor: pointer;
+      border: none;
+      transition: filter .25s ease, flex .4s ease;
+      color: rgba(0,0,0,0.65);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .stage-seg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background .25s ease;
+    }
+    .stage-seg:hover::after, .stage-seg.active::after { background:rgba(255,255,255,0.12); }
+    .stage-seg.active { box-shadow: 0 0 0 3px rgba(255,255,255,0.5) inset; color:rgba(0,0,0,0.85); }
+    .seg-n1  { background:#7eb8f7; flex: 0 0 7.8%; }
+    .seg-n2a { background:#4a90d9; flex: 0 0 25.6%; color:rgba(255,255,255,.75); }
+    .seg-n3  { background:#1a5ca8; flex: 0 0 31.1%; color:rgba(255,255,255,.85); }
+    .seg-n2b { background:#4a90d9; flex: 0 0 7.8%;  color:rgba(255,255,255,.75); }
+    .seg-rem { background:#c8b8ff; flex: 0 0 27.8%; }
+
+    .stage-detail-panel {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--c-lavender-15);
+      border-radius: 14px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .5s ease, padding .5s ease, opacity .4s ease;
+      opacity: 0;
+    }
+    .stage-detail-panel.open {
+      max-height: 340px;
+      opacity: 1;
+      padding: 28px 32px;
+    }
+
+    .stage-detail-inner { display:none; }
+    .stage-detail-inner.active { display:block; }
+
+    .stage-detail-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .stage-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 16px;
+    }
+    .stage-detail-item { }
+    .stage-detail-item .di-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(244,240,255,.40);
+      margin-bottom: 4px;
+    }
+    .stage-detail-item .di-value {
+      font-size: .9rem;
+      color: rgba(244,240,255,.85);
+      line-height: 1.5;
+    }
+
+    /* Stage close hint */
+    .stage-close-hint {
+      font-size:.72rem;
+      color:rgba(244,240,255,.28);
+      text-align:right;
+      margin-top:16px;
+    }
+
+    /* ============================================================
+       17. BRAIN WAVE VISUALIZER
+       ============================================================ */
+    .brainwave-wrap { margin-bottom: 80px; }
+    .brainwave-wrap h3 { margin-bottom: 8px; }
+    .brainwave-wrap > p { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:20px; }
+
+    .bw-tab-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .bw-tab {
+      padding: 7px 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(200,184,255,0.15);
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: .8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--ease);
+      white-space: nowrap;
+      color: rgba(244,240,255,.50);
+    }
+    .bw-tab:hover { border-color:rgba(200,184,255,0.4); color:rgba(244,240,255,.85); }
+    .bw-tab.active {
+      font-weight: 700;
+      color: #0a0f2e;
+      border-color: transparent;
+    }
+
+    .bw-canvas-shell {
+      background: #080c20;
+      border: 1px solid rgba(200,184,255,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      margin-bottom: 16px;
+    }
+    #bw-canvas { display:block; width:100%; height:auto; }
+
+    .bw-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+      gap: 12px;
+    }
+    .bw-info-chip {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(200,184,255,0.10);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .bw-info-chip .chip-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(244,240,255,.35);
+      margin-bottom: 4px;
+    }
+    .bw-info-chip .chip-value {
+      font-size: .88rem;
+      color: rgba(244,240,255,.85);
+      line-height: 1.4;
+    }
+
+    /* ── auto-cycle indicator ── */
+    .bw-auto-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .bw-auto-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse-ring 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .bw-auto-label {
+      font-size: .75rem;
+      color: rgba(244,240,255,.35);
+    }
+
+    /* ============================================================
+       18. BRAIN WAVE DATA TABLE
+       ============================================================ */
+    .bw-table-wrap { margin-bottom: 20px; }
+    .bw-table-wrap h3 { margin-bottom: 8px; }
+    .bw-table-wrap > p { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:20px; }
+
+    .wave-dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* ============================================================
+       19. MEMORY SECTION
+       ============================================================ */
+    #memory { background: var(--c-navy); }
+
+    /* ── Memory pathway diagram ── */
+    .mem-diagram-wrap { margin-bottom: 72px; }
+    .mem-diagram-wrap h3 { margin-bottom: 8px; }
+    .mem-diagram-wrap > p { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:24px; }
+
+    .mem-svg-shell {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--c-lavender-15);
+      border-radius: 16px;
+      padding: 16px;
+      overflow: hidden;
+      box-shadow: var(--glow-md);
+    }
+    #mem-svg { display:block; width:100%; height:auto; }
+
+    /* Animated arrows in the SVG — driven by JS adding .draw class */
+    .mem-arr {
+      stroke-dashoffset: var(--dl, 200);
+      stroke-dasharray:  var(--dl, 200);
+      transition: stroke-dashoffset 1.1s ease;
+    }
+    .mem-arr.draw { stroke-dashoffset: 0; }
+
+    /* Flowing dashes (replay arrows inside NREM) */
+    .mem-flow {
+      stroke-dasharray: 6 5;
+      animation: flow-dash 0.6s linear infinite;
+    }
+
+    /* ── Gold callout cards ── */
+    .mem-callouts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+    .mem-callout {
+      border: 1px solid rgba(255,209,102,0.28);
+      border-radius: 14px;
+      padding: 24px 22px;
+      background: rgba(255,209,102,0.04);
+      box-shadow: 0 0 24px rgba(255,209,102,0.08);
+      transition: box-shadow var(--ease), transform var(--ease);
+    }
+    .mem-callout:hover {
+      box-shadow: 0 0 36px rgba(255,209,102,0.18);
+      transform: translateY(-3px);
+    }
+    .callout-big {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem,4vw,2.8rem);
+      font-weight: 900;
+      color: var(--c-gold);
+      line-height: 1;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .callout-text {
+      font-size: .87rem;
+      color: rgba(244,240,255,.72);
+      line-height: 1.55;
+    }
+
+    /* ── NREM vs REM split ── */
+    .nrem-rem-wrap { margin-bottom: 64px; }
+    .nrem-rem-wrap h3 { margin-bottom: 8px; }
+    .nrem-rem-wrap > p { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:24px; }
+
+    .nrem-rem-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--c-lavender-15);
+      box-shadow: var(--glow-md);
+    }
+    .split-nrem { background: rgba(74,144,217,0.10); border-right: 1px solid rgba(200,184,255,0.12); }
+    .split-rem  { background: rgba(200,184,255,0.08); }
+
+    .split-header {
+      padding: 20px 28px 12px;
+      border-bottom: 1px solid rgba(200,184,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .split-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .split-header h4 { font-size:.95rem; font-weight:700; }
+    .split-nrem .split-header h4 { color:#7eb8f7; }
+    .split-rem  .split-header h4 { color:var(--c-lavender); }
+
+    /* Content reveals from top as section enters viewport */
+    .split-body {
+      padding: 0 28px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 1s ease, padding .5s ease;
+    }
+    .split-body.open {
+      max-height: 480px;
+      padding: 20px 28px 28px;
+    }
+
+    .split-list {
+      list-style: none;
+      padding: 0;
+    }
+    .split-list li {
+      font-size: .88rem;
+      color: rgba(244,240,255,.78);
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(200,184,255,0.06);
+      display: flex;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .split-list li:last-child { border-bottom:none; }
+    .split-list li::before {
+      content: '→';
+      color: var(--c-lavender);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    /* ── REM neurotransmitter callout ── */
+    .rem-neuro-callout {
+      border: 1px solid rgba(200,184,255,0.30);
+      border-radius: 14px;
+      padding: 28px 32px;
+      background: rgba(200,184,255,0.05);
+      animation: card-glow-pulse 4s ease-in-out infinite;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .rem-neuro-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .rem-neuro-callout h4 { color:var(--c-lavender); margin-bottom:8px; }
+    .rem-neuro-callout p  { font-size:.9rem; color:rgba(244,240,255,.75); margin:0; line-height:1.65; }
+
+    /* ============================================================
+       20. MENTAL HEALTH SECTION
+       ============================================================ */
+    #mental-health { background: var(--c-dark); }
+
+    /* ── Bidirectional cycle ── */
+    .bidir-wrap { margin-bottom: 72px; }
+    .bidir-wrap h3 { margin-bottom: 8px; }
+    .bidir-wrap > p { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:24px; }
+    .bidir-diagram { display:flex; justify-content:center; }
+    #bidir-svg { width:100%; max-width:640px; height:auto; }
+
+    /* ── Neurotransmitter cards ── */
+    .neuro-intro { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:24px; }
+    .neuro-grid {
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+      gap: 14px;
+      margin-bottom: 72px;
+    }
+    .neuro-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-lavender-15);
+      border-radius: 16px;
+      padding: 22px 16px 20px;
+      text-align: center;
+      transition: transform var(--ease), box-shadow var(--ease);
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .neuro-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .6s ease, transform .6s ease, box-shadow .3s ease;
+    }
+    .neuro-card:hover { transform: translateY(-5px) !important; box-shadow: var(--glow-lg); }
+    .neuro-icon { font-size:1.9rem; margin-bottom:10px; display:block; }
+    .neuro-name { font-family:var(--font-serif); font-size:.95rem; font-weight:700; margin-bottom:8px; }
+    .neuro-effect { font-size:.78rem; color:rgba(244,240,255,.60); line-height:1.55; }
+
+    /* ── Amygdala / PFC toggle ── */
+    .amyg-wrap { margin-bottom: 72px; }
+    .amyg-wrap h3 { margin-bottom: 8px; }
+    .amyg-wrap > p { font-size:.95rem; color:rgba(244,240,255,.65); max-width:700px; margin-bottom:24px; }
+
+    .amyg-toggle-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--c-lavender-15);
+      border-radius: 40px;
+      padding: 4px;
+      width: fit-content;
+    }
+    .amyg-btn {
+      padding: 9px 24px;
+      border-radius: 36px;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .4s ease;
+      background: transparent;
+      color: rgba(244,240,255,.45);
+    }
+    .amyg-btn.rested-btn  { }
+    .amyg-btn.deprived-btn{ }
+    .amyg-btn.active-rested  { background:#166534; color:#86efac; }
+    .amyg-btn.active-deprived{ background:#7f1d1d; color:#fca5a5; }
+
+    .amyg-panel {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--c-lavender-15);
+      border-radius: 18px;
+      padding: 32px;
+    }
+    .amyg-regions {
+      display: grid;
+      grid-template-columns: 1fr 160px 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+    .amyg-region {
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: box-shadow .6s ease;
+    }
+    .amyg-region.amygdala-box {
+      background: rgba(239,68,68,0.10);
+      border: 1px solid rgba(239,68,68,0.30);
+    }
+    .amyg-region.pfc-box {
+      background: rgba(74,144,217,0.10);
+      border: 1px solid rgba(74,144,217,0.30);
+    }
+    .region-icon { font-size:1.6rem; margin-bottom:8px; display:block; }
+    .region-name { font-weight:700; font-size:.95rem; margin-bottom:4px; }
+    .amygdala-box .region-name { color:#f87171; }
+    .pfc-box      .region-name { color:#7eb8f7; }
+    .region-role  { font-size:.78rem; color:rgba(244,240,255,.55); line-height:1.4; }
+    .region-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 10px;
+      transition: all .6s ease;
+    }
+
+    .conn-center { text-align:center; }
+    .conn-label  { font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(244,240,255,.35); margin-bottom:8px; }
+    .conn-track  { height:10px; background:rgba(255,255,255,.08); border-radius:5px; overflow:hidden; margin-bottom:6px; }
+    .conn-fill   { height:100%; border-radius:5px; transition:width .8s ease, background .8s ease; }
+    .conn-status { font-size:.8rem; font-weight:700; transition:color .8s ease; }
+
+    /* ── MH stat boxes ── */
+    .mh-stats { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .mh-stat {
+      padding: 28px 28px 24px;
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      border-left: 4px solid var(--c-lavender);
+      position: relative;
+      overflow: hidden;
+    }
+    .mh-stat-big {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem,5vw,3.8rem);
+      font-weight: 900;
+      color: var(--c-gold);
+      line-height: 1;
+      margin-bottom: 4px;
+      display: block;
+      position: relative;
+    }
+    .mh-stat-big::after {
+      content: '';
+      display: block;
+      height: 3px;
+      background: var(--c-gold);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s ease .2s;
+      margin-top: 8px;
+    }
+    .reveal.visible .mh-stat-big::after { transform:scaleX(1); }
+    .mh-stat p { font-size:.88rem; color:rgba(244,240,255,.70); margin:0; line-height:1.6; }
+
+    /* ============================================================
+       21. DISORDERS SECTION — FLIP CARDS
+       ============================================================ */
+    #disorders { background: var(--c-navy); }
+
+    /* 6-column grid → row 1: 3 cards spanning 2 cols each
+                      → row 2: 2 cards centered               */
+    .disorders-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 22px;
+    }
+    .flip-card:nth-child(1),
+    .flip-card:nth-child(2),
+    .flip-card:nth-child(3) { grid-column: span 2; }
+    .flip-card:nth-child(4) { grid-column: 2 / 4; }
+    .flip-card:nth-child(5) { grid-column: 4 / 6; }
+
+    /* 3D card shell */
+    .flip-card {
+      perspective: 1100px;
+      height: 340px;
+      cursor: pointer;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.68s cubic-bezier(.4,0,.2,1);
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Shared face styles */
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      padding: 28px 22px;
+    }
+
+    /* Front face */
+    .flip-front {
+      background: var(--c-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: box-shadow .3s ease;
+    }
+    .flip-card:hover .flip-front { box-shadow: var(--glow-lg); }
+
+    .flip-front-icon {
+      font-size: 2.6rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .flip-front-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--c-off-white);
+      margin-bottom: 10px;
+    }
+    .flip-front-hook {
+      font-size: .82rem;
+      color: rgba(244,240,255,.55);
+      line-height: 1.5;
+    }
+    .flip-hint {
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+      font-size: .65rem;
+      color: rgba(244,240,255,.22);
+      letter-spacing: .06em;
+    }
+
+    /* Back face */
+    .flip-back {
+      background: rgba(20,14,50,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transform: rotateY(180deg);
+      overflow-y: auto;
+      border: 1px solid rgba(200,184,255,0.18);
+      padding: 22px 20px;
+    }
+    .flip-back::-webkit-scrollbar { width: 3px; }
+    .flip-back::-webkit-scrollbar-track { background: transparent; }
+    .flip-back::-webkit-scrollbar-thumb { background: rgba(200,184,255,0.25); border-radius:2px; }
+
+    .flip-dsm-badge {
+      display: inline-block;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: var(--c-lavender-20);
+      color: var(--c-lavender);
+      margin-bottom: 10px;
+    }
+    .flip-back-name {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--c-off-white);
+      margin-bottom: 12px;
+    }
+    .flip-back-section {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(244,240,255,.35);
+      margin-bottom: 4px;
+      margin-top: 10px;
+    }
+    .flip-back-text {
+      font-size: .8rem;
+      color: rgba(244,240,255,.78);
+      line-height: 1.55;
+      margin-bottom: 6px;
+    }
+    .flip-back-list {
+      list-style: none;
+      padding: 0;
+    }
+    .flip-back-list li {
+      font-size: .78rem;
+      color: rgba(244,240,255,.72);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      display: flex;
+      gap: 7px;
+      line-height: 1.45;
+    }
+    .flip-back-list li::before {
+      content: '◆';
+      font-size: .45rem;
+      color: var(--c-lavender);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .flip-treatment {
+      margin-top: 10px;
+      font-size: .78rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: rgba(200,184,255,0.07);
+      border-left: 2px solid var(--c-lavender);
+      color: rgba(244,240,255,.75);
+    }
+
+    /* Per-card accent glows on front */
+    .dc-insomnia  .flip-front { border-top: 3px solid #ffd166; }
+    .dc-insomnia:hover .flip-front { box-shadow: 0 0 40px rgba(255,209,102,.20); }
+    .dc-narcolepsy .flip-front { border-top: 3px solid #7eb8f7; }
+    .dc-narcolepsy:hover .flip-front { box-shadow: 0 0 40px rgba(126,184,247,.20); }
+    .dc-apnea  .flip-front { border-top: 3px solid #4ade80; }
+    .dc-apnea:hover .flip-front { box-shadow: 0 0 40px rgba(74,222,128,.20); }
+    .dc-rbd    .flip-front { border-top: 3px solid #f87171; }
+    .dc-rbd:hover .flip-front { box-shadow: 0 0 40px rgba(248,113,113,.20); }
+    .dc-sleep  .flip-front { border-top: 3px solid var(--c-lavender); }
+    .dc-sleep:hover .flip-front { box-shadow: 0 0 40px rgba(200,184,255,.22); }
+
+    /* ============================================================
+       22. RESPONSIVE
+       ============================================================ */
+    @media (max-width:860px) { .nav-links{display:none;} .nav-hamburger{display:flex;} }
+    @media (max-width:900px) {
+      :root { --section-pad-v:72px; }
+      .mem-callouts  { grid-template-columns:1fr; }
+      .neuro-grid    { grid-template-columns:repeat(3,1fr); }
+      /* Disorders: collapse to 2-col */
+      .disorders-grid { grid-template-columns:repeat(2,1fr); }
+      .flip-card:nth-child(1),
+      .flip-card:nth-child(2),
+      .flip-card:nth-child(3),
+      .flip-card:nth-child(4),
+      .flip-card:nth-child(5) { grid-column: span 1; }
+      .flip-card:nth-child(5) { grid-column: 1 / 3; max-width:320px; justify-self:center; }
+    }
+    @media (max-width:700px) {
+      .nrem-rem-split { grid-template-columns:1fr; }
+      .split-nrem { border-right:none; border-bottom:1px solid rgba(200,184,255,.12); }
+      .amyg-regions { grid-template-columns:1fr; }
+      .conn-center  { order:-1; }
+      .mh-stats     { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      .stat-sep{display:none;} .hero-stats{gap:28px;} .stage-seg{font-size:.6rem;}
+      .mem-callouts { grid-template-columns:1fr; }
+      .neuro-grid   { grid-template-columns:repeat(2,1fr); }
+      /* Disorders: 1 column */
+      .disorders-grid { grid-template-columns:1fr; }
+      .flip-card:nth-child(n) { grid-column: span 1; max-width:100%; justify-self:stretch; }
+      .flip-card { height:300px; }
+    }
+    @media (max-width:600px) {
+      :root { --section-pad-v:56px; --section-pad-h:18px; }
+      .section-lead { font-size:1rem; margin-bottom:44px; }
+      #hero-moon { display:none; }
+      .stage-detail-panel.open { max-height:500px; }
+      .rem-neuro-callout { flex-direction:column; gap:12px; }
+      .neuro-grid { grid-template-columns:1fr 1fr; }
+    }
+
+    /* ============================================================
+       23. DEPRIVATION TIMELINE
+       ============================================================ */
+    #deprivation { background:#0d1117; padding:var(--section-pad-v) var(--section-pad-h); }
+
+    .dep-layout {
+      max-width:780px;
+      margin:0 auto;
+      position:relative;
+    }
+
+    /* Vertical spine — absolutely overlaid on the dot column */
+    .dep-spine-svg { position:absolute; top:0; left:20px; width:4px; z-index:0; }
+    .dep-spine-svg line {
+      stroke:#2d1b69;
+      stroke-width:4;
+      stroke-linecap:round;
+    }
+    .dep-spine-svg line.spine-drawn {
+      stroke:url(#spineGrad);
+    }
+
+    /* Nodes */
+    .dep-nodes-col { display:flex; flex-direction:column; gap:0; }
+
+    .dep-node-wrap {
+      display:grid;
+      grid-template-columns: 56px 1fr;
+      gap:0 32px;
+      margin-bottom:60px;
+      opacity:0;
+      transform:translateX(-18px);
+      transition:opacity .5s ease, transform .5s ease;
+    }
+    .dep-node-wrap.visible { opacity:1; transform:translateX(0); }
+
+    .dep-node-dot-col { display:flex; justify-content:center; padding-top:6px; }
+    .dep-dot {
+      width:24px; height:24px;
+      border-radius:50%;
+      border:3px solid currentColor;
+      background:#0d1117;
+      box-shadow:0 0 16px currentColor;
+      flex-shrink:0;
+      position:relative;
+      z-index:2;
+    }
+    .dep-dot-24  { color:#ffd166; }
+    .dep-dot-48  { color:#f97316; }
+    .dep-dot-72  { color:#ef4444; }
+    .dep-dot-96  { color:#991b1b; }
+
+    .dep-card {
+      background:var(--c-card);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:14px;
+      padding:22px 24px 20px;
+      border-left:3px solid currentColor;
+    }
+    .dep-card-24 { color:#ffd166; }
+    .dep-card-48 { color:#f97316; }
+    .dep-card-72 { color:#ef4444; }
+    .dep-card-96 { color:#991b1b; }
+
+    .dep-card h3 {
+      font-size:1.1rem;
+      font-weight:700;
+      margin-bottom:14px;
+      color:currentColor;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dep-card h3 span.dep-badge {
+      font-size:.72rem;
+      font-weight:600;
+      padding:2px 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:var(--c-off-white);
+      letter-spacing:.04em;
+    }
+
+    .dep-symptom-group { margin-bottom:10px; }
+    .dep-symptom-group:last-child { margin-bottom:0; }
+    .dep-symptom-label {
+      font-size:.68rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      opacity:.6;
+      color:var(--c-lavender);
+      margin-bottom:4px;
+    }
+    .dep-symptom-list {
+      list-style:none;
+      padding:0; margin:0;
+      display:flex; flex-direction:column; gap:3px;
+    }
+    .dep-symptom-list li {
+      font-size:.88rem;
+      color:rgba(244,240,255,.8);
+      padding-left:14px;
+      position:relative;
+    }
+    .dep-symptom-list li::before {
+      content:'';
+      position:absolute; left:0; top:50%; transform:translateY(-50%);
+      width:5px; height:5px; border-radius:50%;
+      background:currentColor;
+    }
+    .dep-card-24 .dep-symptom-list li::before { background:#ffd166; }
+    .dep-card-48 .dep-symptom-list li::before { background:#f97316; }
+    .dep-card-72 .dep-symptom-list li::before { background:#ef4444; }
+    .dep-card-96 .dep-symptom-list li::before { background:#991b1b; }
+
+    /* Microsleep callout */
+    .dep-microsleep {
+      background:rgba(239,68,68,.08);
+      border:1px solid rgba(239,68,68,.3);
+      border-radius:10px;
+      padding:14px 18px;
+      margin-top:4px;
+      display:flex; align-items:flex-start; gap:12px;
+    }
+    .dep-microsleep-icon {
+      font-size:1.3rem;
+      flex-shrink:0;
+      animation: blink-icon 1.4s ease-in-out infinite;
+    }
+    @keyframes blink-icon {
+      0%,100% { opacity:1; }
+      50%      { opacity:.2; }
+    }
+    .dep-microsleep p {
+      font-size:.88rem;
+      color:rgba(244,240,255,.85);
+      line-height:1.5;
+      margin:0;
+    }
+    .dep-microsleep strong { color:#ef4444; }
+
+    /* BAC warning box */
+    .dep-bac-box {
+      max-width:780px;
+      margin:0 auto 0;
+      background:rgba(249,115,22,.07);
+      border:1px solid rgba(249,115,22,.35);
+      border-left:4px solid #f97316;
+      border-radius:10px;
+      padding:16px 22px;
+      display:flex; align-items:center; gap:16px;
+    }
+    .dep-bac-icon { font-size:1.6rem; flex-shrink:0; }
+    .dep-bac-box p { margin:0; font-size:.9rem; color:rgba(244,240,255,.85); line-height:1.5; }
+    .dep-bac-box strong { color:#f97316; }
+
+    @media (max-width:600px) {
+      .dep-node-wrap { grid-template-columns:36px 1fr; gap:0 16px; }
+      .dep-dot { width:18px; height:18px; }
+    }
+
+    /* ============================================================
+       24. IMPROVE SLEEP (CBT-I)
+       ============================================================ */
+    #improve { background:var(--c-navy); padding:var(--section-pad-v) var(--section-pad-h); }
+
+    /* Tab strip */
+    .cbt-tabs {
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-bottom:32px;
+    }
+    .cbt-tab {
+      padding:9px 18px;
+      border-radius:999px;
+      border:1px solid rgba(200,184,255,.2);
+      background:transparent;
+      color:rgba(244,240,255,.6);
+      font:600 .82rem/1 'Inter', sans-serif;
+      cursor:pointer;
+      transition:background .2s, color .2s, border-color .2s;
+    }
+    .cbt-tab:hover { border-color:rgba(200,184,255,.5); color:var(--c-off-white); }
+    .cbt-tab.active {
+      background:var(--c-lavender);
+      border-color:var(--c-lavender);
+      color:#0a0f2e;
+    }
+
+    /* Tab panels */
+    .cbt-panel { display:none; animation:fadeUp .35s ease; }
+    .cbt-panel.active { display:block; }
+
+    .cbt-panel-inner {
+      background:var(--c-card);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px;
+      padding:28px 32px;
+    }
+    .cbt-panel h3 {
+      font-size:1.15rem; font-weight:700;
+      color:var(--c-lavender);
+      margin-bottom:12px;
+    }
+    .cbt-panel p { font-size:.92rem; color:rgba(244,240,255,.8); line-height:1.65; margin-bottom:0; }
+    .cbt-panel p + p { margin-top:10px; }
+    .cbt-panel strong { color:var(--c-gold); }
+
+    /* Checklist */
+    .cbt-checklist-wrap { margin-top:56px; }
+    .cbt-checklist-wrap h3 {
+      font-size:1.1rem; font-weight:700;
+      color:var(--c-off-white); margin-bottom:20px;
+    }
+    .cbt-checklist {
+      list-style:none; padding:0; margin:0;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .cbt-check-item {
+      display:flex; align-items:center; gap:14px;
+      background:var(--c-card);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:10px;
+      padding:13px 18px;
+      cursor:pointer;
+      transition:border-color .2s, background .2s;
+      opacity:0; transform:translateX(-16px);
+      transition:opacity .4s ease, transform .4s ease, border-color .2s, background .2s;
+    }
+    .cbt-check-item.reveal-check { opacity:1; transform:translateX(0); }
+    .cbt-check-item.checked {
+      border-color:rgba(100,220,140,.3);
+      background:rgba(100,220,140,.05);
+    }
+    .cbt-check-box {
+      width:22px; height:22px; flex-shrink:0;
+      border-radius:6px;
+      border:2px solid rgba(200,184,255,.35);
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s, border-color .2s;
+    }
+    .cbt-check-item.checked .cbt-check-box {
+      background:#4ade80; border-color:#4ade80;
+    }
+    .cbt-check-tick {
+      width:12px; height:12px;
+      stroke:#0a0f2e; stroke-width:2.5; fill:none;
+      stroke-dasharray:16; stroke-dashoffset:16;
+      transition:stroke-dashoffset .25s ease .05s;
+    }
+    .cbt-check-item.checked .cbt-check-tick { stroke-dashoffset:0; }
+    .cbt-check-label { font-size:.9rem; color:rgba(244,240,255,.85); line-height:1.4; }
+
+    /* Score tally */
+    .cbt-tally {
+      display:flex; align-items:center; gap:12px;
+      margin-top:16px;
+      font-size:.82rem; color:rgba(200,184,255,.7);
+    }
+    .cbt-tally-bar {
+      flex:1; height:6px; border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .cbt-tally-fill {
+      height:100%; border-radius:999px;
+      background:var(--c-lavender);
+      width:0%; transition:width .4s ease;
+    }
+
+    /* Quiz */
+    .cbt-quiz-wrap { margin-top:56px; }
+    .cbt-quiz-wrap h3 {
+      font-size:1.1rem; font-weight:700;
+      color:var(--c-off-white); margin-bottom:6px;
+    }
+    .cbt-quiz-lead {
+      font-size:.85rem; color:rgba(200,184,255,.6);
+      margin-bottom:24px;
+    }
+    .cbt-question {
+      background:var(--c-card);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:10px;
+      padding:16px 20px;
+      margin-bottom:10px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      flex-wrap:wrap;
+    }
+    .cbt-q-text { font-size:.9rem; color:rgba(244,240,255,.85); flex:1; }
+    .cbt-q-btns { display:flex; gap:8px; flex-shrink:0; }
+    .cbt-q-btn {
+      padding:6px 16px;
+      border-radius:999px;
+      border:1px solid rgba(200,184,255,.2);
+      background:transparent;
+      color:rgba(244,240,255,.6);
+      font:600 .78rem/1 'Inter', sans-serif;
+      cursor:pointer;
+      transition:background .15s, color .15s, border-color .15s;
+    }
+    .cbt-q-btn:hover { border-color:rgba(200,184,255,.5); color:var(--c-off-white); }
+    .cbt-q-btn.selected-yes { background:#4ade80; border-color:#4ade80; color:#0a0f2e; }
+    .cbt-q-btn.selected-no  { background:var(--c-lavender); border-color:var(--c-lavender); color:#0a0f2e; }
+
+    .cbt-quiz-result {
+      border-radius:12px;
+      padding:20px 24px;
+      margin-top:16px;
+      display:none;
+      border-left:4px solid;
+    }
+    .cbt-quiz-result.show { display:block; animation:fadeUp .35s ease; }
+    .cbt-result-label {
+      font-size:.72rem; font-weight:700; letter-spacing:.1em;
+      text-transform:uppercase; margin-bottom:6px;
+    }
+    .cbt-result-text { font-size:.9rem; line-height:1.5; }
+
+    .res-excellent { background:rgba(74,222,128,.08); border-color:#4ade80; }
+    .res-excellent .cbt-result-label { color:#4ade80; }
+    .res-excellent .cbt-result-text   { color:rgba(244,240,255,.85); }
+
+    .res-moderate { background:rgba(255,209,102,.08); border-color:var(--c-gold); }
+    .res-moderate .cbt-result-label { color:var(--c-gold); }
+    .res-moderate .cbt-result-text   { color:rgba(244,240,255,.85); }
+
+    .res-needs-work { background:rgba(249,115,22,.08); border-color:#f97316; }
+    .res-needs-work .cbt-result-label { color:#f97316; }
+    .res-needs-work .cbt-result-text   { color:rgba(244,240,255,.85); }
+
+    .res-at-risk { background:rgba(239,68,68,.08); border-color:#ef4444; }
+    .res-at-risk .cbt-result-label { color:#ef4444; }
+    .res-at-risk .cbt-result-text   { color:rgba(244,240,255,.85); }
+
+    @media (max-width:600px) {
+      .cbt-panel-inner { padding:20px 18px; }
+      .cbt-question { flex-direction:column; align-items:flex-start; }
+    }
+
+    /* ============================================================
+       25. REFERENCES + FOOTER
+       ============================================================ */
+    #references { background:#0d1117; padding:var(--section-pad-v) var(--section-pad-h); }
+
+    .ref-list {
+      list-style:none; padding:0; margin:0;
+      display:flex; flex-direction:column; gap:12px;
+      max-width:860px;
+    }
+    .ref-item {
+      background:var(--c-card);
+      border:1px solid rgba(255,255,255,.06);
+      border-left:3px solid var(--c-lavender);
+      border-radius:10px;
+      padding:16px 20px;
+      display:flex; align-items:flex-start; gap:14px;
+      transition:box-shadow .25s, border-color .25s;
+      opacity:0; transform:translateY(12px);
+      transition:opacity .45s ease, transform .45s ease, box-shadow .25s, border-color .25s;
+    }
+    .ref-item.visible {
+      opacity:1; transform:translateY(0);
+    }
+    .ref-item:hover {
+      box-shadow:0 0 28px rgba(200,184,255,.12);
+      border-left-color:#a78bfa;
+    }
+    .ref-badge {
+      flex-shrink:0;
+      font-size:.66rem; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase;
+      padding:3px 9px; border-radius:999px;
+      background:rgba(200,184,255,.1);
+      color:var(--c-lavender);
+      white-space:nowrap;
+      margin-top:2px;
+    }
+    .ref-badge.badge-book         { background:rgba(255,209,102,.1); color:var(--c-gold); }
+    .ref-badge.badge-govt         { background:rgba(74,222,128,.1);  color:#4ade80; }
+    .ref-badge.badge-meta         { background:rgba(249,115,22,.1);  color:#f97316; }
+    .ref-badge.badge-clinical     { background:rgba(96,165,250,.1);  color:#60a5fa; }
+    .ref-badge.badge-systematic   { background:rgba(200,184,255,.1); color:var(--c-lavender); }
+
+    .ref-text { font-size:.88rem; color:rgba(244,240,255,.8); line-height:1.55; }
+    .ref-text em { color:rgba(200,184,255,.7); font-style:italic; }
+
+    /* Footer */
+    .site-footer {
+      background:#06080f;
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:40px var(--section-pad-h) 32px;
+      text-align:center;
+    }
+    .footer-title {
+      font-size:1rem; font-weight:700;
+      color:var(--c-lavender); margin-bottom:6px;
+    }
+    .footer-sub {
+      font-size:.8rem; color:rgba(244,240,255,.35);
+      line-height:1.6;
+    }
+    .footer-divider {
+      width:40px; height:2px;
+      background:var(--c-lavender);
+      margin:18px auto;
+      border-radius:999px;
+      opacity:.3;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <header>
+    <nav id="navbar" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo" aria-label="Back to top — The Psychology of Sleep">The Psychology of Sleep</a>
+        <ul class="nav-links" role="list">
+          <li><a href="#science"       class="nav-link">Science</a></li>
+          <li><a href="#memory"        class="nav-link">Memory</a></li>
+          <li><a href="#mental-health" class="nav-link">Mental Health</a></li>
+          <li><a href="#disorders"     class="nav-link">Disorders</a></li>
+          <li><a href="#deprivation"   class="nav-link">Deprivation</a></li>
+          <li><a href="#improve"       class="nav-link">Improve Sleep</a></li>
+          <li><a href="#references"    class="nav-link">References</a></li>
+        </ul>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <nav id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+    <a href="#science"       class="mobile-nav-link" tabindex="-1">Science</a>
+    <div class="mobile-nav-divider" aria-hidden="true"></div>
+    <a href="#memory"        class="mobile-nav-link" tabindex="-1">Memory</a>
+    <div class="mobile-nav-divider" aria-hidden="true"></div>
+    <a href="#mental-health" class="mobile-nav-link" tabindex="-1">Mental Health</a>
+    <div class="mobile-nav-divider" aria-hidden="true"></div>
+    <a href="#disorders"     class="mobile-nav-link" tabindex="-1">Disorders</a>
+    <div class="mobile-nav-divider" aria-hidden="true"></div>
+    <a href="#deprivation"   class="mobile-nav-link" tabindex="-1">Deprivation</a>
+    <div class="mobile-nav-divider" aria-hidden="true"></div>
+    <a href="#improve"       class="mobile-nav-link" tabindex="-1">Improve Sleep</a>
+    <div class="mobile-nav-divider" aria-hidden="true"></div>
+    <a href="#references"    class="mobile-nav-link" tabindex="-1">References</a>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section id="hero" aria-label="Introduction">
+      <div id="hero-parallax" aria-hidden="true"></div>
+      <div id="hero-particles" aria-hidden="true"></div>
+
+      <div id="hero-moon" aria-hidden="true">
+        <svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="55" cy="55" r="48" fill="rgba(200,184,255,0.04)" stroke="rgba(200,184,255,0.10)" stroke-width="1"/>
+          <path d="M68 20C52 24 40 38 40 55C40 72 52 86 68 90C48 90 32 74.5 32 55C32 35.5 48 20 68 20Z" fill="url(#moonGrad)" opacity=".92"/>
+          <path d="M58 28C50 34 46 44 47 55C47 44 52 35 60 30Z" fill="rgba(255,255,255,0.25)"/>
+          <circle cx="82" cy="28" r="1.5" fill="rgba(255,209,102,0.8)"/>
+          <circle cx="90" cy="42" r="1"   fill="rgba(200,184,255,0.7)"/>
+          <circle cx="76" cy="16" r="1"   fill="rgba(255,255,255,0.5)"/>
+          <defs>
+            <linearGradient id="moonGrad" x1="32" y1="20" x2="68" y2="90" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#e8dcff"/>
+              <stop offset="100%" stop-color="#a090d0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-eyebrow">AP Psychology Final Project</span>
+        <h1 class="hero-title">The Psychology of Sleep:<br>Why Your Brain Can't Afford to Skip It</h1>
+        <p class="hero-subhead">"Sleep is not optional. It is the single most effective thing you can do to reset your brain and body's mental and physical health each day."</p>
+
+        <div class="hero-stats" role="list" aria-label="Key sleep statistics">
+          <div class="stat-item" role="listitem">
+            <span class="stat-number" id="stat-adults" aria-live="polite">0%</span>
+            <span class="stat-label">of American adults get fewer than 7 hours of sleep per night</span>
+            <span class="stat-source">CDC BRFSS, 2022</span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat-item" role="listitem">
+            <span class="stat-number" id="stat-teens" aria-live="polite">0%</span>
+            <span class="stat-label">of U.S. high school students don't get the recommended 8–10 hours</span>
+            <span class="stat-source">CDC YRBS, 2021</span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat-item" role="listitem">
+            <span class="stat-number" id="stat-global" aria-live="polite">0M</span>
+            <span class="stat-label">adults globally estimated to have insomnia — 16.2% of the world's adult population</span>
+            <span class="stat-source">Global Prevalence Data</span>
+          </div>
+        </div>
+
+        <div class="hero-cta-row">
+          <a href="#science" class="btn-glow hero-cta" aria-label="Scroll down to explore the science of sleep">
+            Explore the Science
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+      </div>
+
+      <div class="wave-divider" aria-hidden="true" style="position:absolute;bottom:0;left:0;right:0;z-index:3;">
+        <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z" fill="#0d1117"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCIENCE SECTION
+         ============================================================ -->
+    <section id="science" class="section-shell bg-dark" aria-labelledby="science-title">
+      <div class="container">
+
+        <span class="eyebrow">01 — The Science</span>
+        <h2 class="section-title" id="science-title">The Science of Sleep</h2>
+        <p class="section-lead">
+          Sleep is not a passive state of unconsciousness — it is a <strong>highly active process</strong>
+          during which the brain performs critical repair, consolidation, and detoxification functions.
+          Humans spend roughly one-third of their lives asleep. The brain remains active throughout,
+          cycling through predictable patterns of electrical activity measurable by EEG.
+        </p>
+
+        <!-- ── Two-Process Model ── -->
+        <div class="two-process-wrap reveal" id="two-process-wrap">
+          <div class="two-process-header">
+            <h3>The Two-Process Model of Sleep Regulation</h3>
+            <p>
+              Two independent biological systems interact to determine when you sleep and when you wake.
+              <strong>Process C</strong> (Circadian rhythm) drives a 24-hour alertness cycle controlled by the
+              suprachiasmatic nucleus (SCN). <strong>Process S</strong> (Homeostatic sleep pressure) tracks
+              adenosine buildup during wakefulness — the longer you stay awake, the greater the urge to sleep.
+              Caffeine works by <em>blocking adenosine receptors</em>, delaying — but never eliminating — this pressure.
+            </p>
+          </div>
+
+          <div class="canvas-shell">
+            <canvas id="two-process-canvas" width="900" height="220"
+              aria-label="Animated chart showing circadian alertness (gold curve) and adenosine sleep pressure (lavender curve) over 24 hours"
+              role="img"></canvas>
+            <div class="two-process-legend" aria-label="Chart legend">
+              <div class="legend-item">
+                <span class="legend-swatch" style="background:var(--c-gold);"></span>
+                Process C — Circadian Alertness (SCN / melatonin)
+              </div>
+              <div class="legend-item">
+                <span class="legend-swatch" style="background:var(--c-lavender);"></span>
+                Process S — Homeostatic Sleep Pressure (Adenosine)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Sleep Stage Cycle Bar ── -->
+        <div class="stage-cycle-wrap reveal" id="stage-cycle-wrap">
+          <h3>The Four Stages of Sleep — One 90-Minute Cycle</h3>
+          <p>
+            Each complete sleep cycle lasts approximately <strong>90 minutes</strong>; most people cycle through
+            3–5 per night. Early cycles are NREM-heavy; later cycles become REM-dominant.
+            Click any stage below to explore what's happening in your brain.
+          </p>
+
+          <div class="stage-bar-label" aria-hidden="true">
+            <span>Stage N1</span><span>N2</span><span>N3 — Deep Sleep</span><span>N2</span><span>REM</span>
+          </div>
+
+          <div class="stage-bar" role="group" aria-label="Sleep stage cycle — click a stage for details">
+            <button class="stage-seg seg-n1"  data-stage="n1"  aria-pressed="false" aria-label="NREM 1 — light sleep, 7 minutes">N1</button>
+            <button class="stage-seg seg-n2a" data-stage="n2a" aria-pressed="false" aria-label="NREM 2 — true sleep, 23 minutes">N2</button>
+            <button class="stage-seg seg-n3"  data-stage="n3"  aria-pressed="false" aria-label="NREM 3 — deep slow-wave sleep, 28 minutes">N3</button>
+            <button class="stage-seg seg-n2b" data-stage="n2b" aria-pressed="false" aria-label="NREM 2 ascending, 7 minutes">N2</button>
+            <button class="stage-seg seg-rem" data-stage="rem" aria-pressed="false" aria-label="REM sleep — paradoxical sleep, 25 minutes">REM</button>
+          </div>
+
+          <div class="stage-detail-panel" id="stage-detail-panel" aria-live="polite">
+
+            <!-- N1 -->
+            <div class="stage-detail-inner" id="detail-n1">
+              <p class="stage-detail-title" style="color:#7eb8f7;">Stage 1 — NREM 1 (Light Sleep)</p>
+              <div class="stage-detail-grid">
+                <div class="stage-detail-item">
+                  <div class="di-label">Brain Waves</div>
+                  <div class="di-value">Alpha → <strong>Theta</strong> (4–7 Hz) — slow, rolling transition</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Duration</div>
+                  <div class="di-value">~7 min per cycle · ~5% of total sleep</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Eye Movement</div>
+                  <div class="di-value">Slow, rolling eye movements</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">What's Happening</div>
+                  <div class="di-value">Transition from wakefulness. <strong>Hypnic jerks</strong> (involuntary muscle twitches) may occur. Easily awakened — person may deny they were asleep.</div>
+                </div>
+              </div>
+              <p class="stage-close-hint">Click the same stage or another to explore</p>
+            </div>
+
+            <!-- N2 -->
+            <div class="stage-detail-inner" id="detail-n2a">
+              <p class="stage-detail-title" style="color:#7eb8f7;">Stage 2 — NREM 2 (True Sleep)</p>
+              <div class="stage-detail-grid">
+                <div class="stage-detail-item">
+                  <div class="di-label">Brain Waves</div>
+                  <div class="di-value"><strong>Sleep spindles</strong> (12–16 Hz bursts) + <strong>K-complexes</strong> (large slow waves)</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Duration</div>
+                  <div class="di-value">~23 min per cycle · ~50% of total nightly sleep</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Body Changes</div>
+                  <div class="di-value">Body temperature drops · heart rate slows</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">What's Happening</div>
+                  <div class="di-value">Clearest indication of true sleep onset. Sleep spindles inhibit external stimuli and are strongly linked to <strong>memory consolidation</strong>. Spindle density correlates with next-day recall.</div>
+                </div>
+              </div>
+              <p class="stage-close-hint">Click the same stage or another to explore</p>
+            </div>
+
+            <!-- N3 -->
+            <div class="stage-detail-inner" id="detail-n3">
+              <p class="stage-detail-title" style="color:#7eb8f7;">Stage 3 — NREM 3 (Slow-Wave / Deep Sleep)</p>
+              <div class="stage-detail-grid">
+                <div class="stage-detail-item">
+                  <div class="di-label">Brain Waves</div>
+                  <div class="di-value"><strong>Delta waves</strong> (0.5–4 Hz) — high amplitude, very low frequency</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Duration</div>
+                  <div class="di-value">~28 min per cycle · ~15–20% of total sleep · concentrated in first half of night</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Body Changes</div>
+                  <div class="di-value">Growth hormone released · cellular and immune repair occur · hardest stage to awaken from</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">What's Happening</div>
+                  <div class="di-value">Critical for <strong>declarative memory</strong> (facts and events). Hippocampal sharp-wave ripples transfer memories to the neocortex. <strong>Sleepwalking and sleep talking</strong> occur during this stage.</div>
+                </div>
+              </div>
+              <p class="stage-close-hint">Click the same stage or another to explore</p>
+            </div>
+
+            <!-- N2b -->
+            <div class="stage-detail-inner" id="detail-n2b">
+              <p class="stage-detail-title" style="color:#7eb8f7;">Stage 2 — NREM 2 (Ascending)</p>
+              <div class="stage-detail-grid">
+                <div class="stage-detail-item">
+                  <div class="di-label">Brain Waves</div>
+                  <div class="di-value"><strong>Sleep spindles</strong> (12–16 Hz) + K-complexes, as the brain ascends from deep sleep</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Duration</div>
+                  <div class="di-value">~7 min — a brief bridge between deep sleep and REM</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Role</div>
+                  <div class="di-value">Transitional stage — brain gradually reactivates before entering REM</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">What's Happening</div>
+                  <div class="di-value">Sleep spindle activity continues to gate sensory input. The body remains still as the brain moves toward the paradoxical activity of REM sleep.</div>
+                </div>
+              </div>
+              <p class="stage-close-hint">Click the same stage or another to explore</p>
+            </div>
+
+            <!-- REM -->
+            <div class="stage-detail-inner" id="detail-rem">
+              <p class="stage-detail-title" style="color:var(--c-lavender);">Stage 4 — REM Sleep (Rapid Eye Movement)</p>
+              <div class="stage-detail-grid">
+                <div class="stage-detail-item">
+                  <div class="di-label">Brain Waves</div>
+                  <div class="di-value"><strong>Beta-like desynchronized</strong> (~15–30 Hz) — nearly indistinguishable from waking</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Duration</div>
+                  <div class="di-value">~25 min in first cycle — grows longer through the night; final REM can last ~60 min</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">Body State</div>
+                  <div class="di-value">Rapid eye movement · <strong>muscle atonia</strong> (voluntary paralysis) prevents acting out dreams · initiated by acetylcholine</div>
+                </div>
+                <div class="stage-detail-item">
+                  <div class="di-label">What's Happening</div>
+                  <div class="di-value">Primary stage for <strong>dreaming</strong>, <strong>emotional memory</strong> processing, and <strong>procedural memory</strong> consolidation. Called "paradoxical sleep" — the brain is as active as waking, yet the body is paralyzed.</div>
+                </div>
+              </div>
+              <p class="stage-close-hint">Click the same stage or another to explore</p>
+            </div>
+
+          </div><!-- /stage-detail-panel -->
+        </div><!-- /stage-cycle-wrap -->
+
+        <!-- ── Brain Wave Visualizer ── -->
+        <div class="brainwave-wrap reveal" id="bw-wrap">
+          <h3>Animated Brain Wave Visualizer</h3>
+          <p>
+            Each sleep stage produces a distinct electrical signature measurable by EEG.
+            Select a stage below to see its live-scrolling waveform — or let it auto-cycle.
+            Notice how <strong>Delta waves</strong> dwarf all others in amplitude, while
+            <strong>REM</strong> is nearly indistinguishable from alert wakefulness.
+          </p>
+
+          <div class="bw-auto-row" aria-live="polite" aria-atomic="true">
+            <div class="bw-auto-dot" aria-hidden="true"></div>
+            <span class="bw-auto-label" id="bw-auto-label">Auto-cycling through all stages — click any tab to lock</span>
+          </div>
+
+          <div class="bw-tab-row" role="tablist" aria-label="Brain wave stage selector">
+            <button class="bw-tab" data-stage="beta"     role="tab" aria-selected="false" style="--tab-c:#ffd166;">Beta</button>
+            <button class="bw-tab" data-stage="alpha"    role="tab" aria-selected="false" style="--tab-c:#7eb8f7;">Alpha</button>
+            <button class="bw-tab" data-stage="theta"    role="tab" aria-selected="false" style="--tab-c:#60a5fa;">Theta</button>
+            <button class="bw-tab" data-stage="spindles" role="tab" aria-selected="false" style="--tab-c:#4ade80;">Spindles</button>
+            <button class="bw-tab" data-stage="delta"    role="tab" aria-selected="false" style="--tab-c:#c8b8ff;">Delta</button>
+            <button class="bw-tab" data-stage="rem"      role="tab" aria-selected="false" style="--tab-c:#f97316;">REM</button>
+          </div>
+
+          <div class="bw-canvas-shell">
+            <canvas id="bw-canvas" width="900" height="140"
+              role="img"
+              aria-label="Live scrolling EEG waveform for the selected sleep stage"></canvas>
+          </div>
+
+          <div class="bw-info" id="bw-info" aria-live="polite">
+            <div class="bw-info-chip">
+              <div class="chip-label">Stage</div>
+              <div class="chip-value" id="bw-chip-stage">—</div>
+            </div>
+            <div class="bw-info-chip">
+              <div class="chip-label">Wave Type</div>
+              <div class="chip-value" id="bw-chip-wave">—</div>
+            </div>
+            <div class="bw-info-chip">
+              <div class="chip-label">Frequency</div>
+              <div class="chip-value" id="bw-chip-freq">—</div>
+            </div>
+            <div class="bw-info-chip" style="grid-column:1/-1;">
+              <div class="chip-label">What This Means</div>
+              <div class="chip-value" id="bw-chip-desc">—</div>
+            </div>
+          </div>
+        </div><!-- /brainwave-wrap -->
+
+        <!-- ── Brain Wave Frequency Table ── -->
+        <div class="bw-table-wrap reveal">
+          <h3>Brain Wave Frequency Reference</h3>
+          <p>All six wave types occur during sleep and wakefulness — each with a distinct frequency, amplitude, and cognitive function.</p>
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="Brain wave frequency table">
+              <thead>
+                <tr>
+                  <th scope="col">Stage</th>
+                  <th scope="col">Wave Type</th>
+                  <th scope="col">Frequency</th>
+                  <th scope="col">State</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="wave-dot" style="background:#ffd166;" aria-hidden="true"></span>Awake / Alert</td>
+                  <td><strong>Beta</strong></td>
+                  <td>13–30 Hz</td>
+                  <td>Active thinking, focus, problem-solving</td>
+                </tr>
+                <tr>
+                  <td><span class="wave-dot" style="background:#7eb8f7;" aria-hidden="true"></span>Awake / Relaxed</td>
+                  <td><strong>Alpha</strong></td>
+                  <td>8–12 Hz</td>
+                  <td>Calm, eyes closed, pre-sleep relaxation</td>
+                </tr>
+                <tr>
+                  <td><span class="wave-dot" style="background:#60a5fa;" aria-hidden="true"></span>NREM 1</td>
+                  <td><strong>Theta</strong></td>
+                  <td>4–7 Hz</td>
+                  <td>Drowsy; transition into sleep</td>
+                </tr>
+                <tr>
+                  <td><span class="wave-dot" style="background:#4ade80;" aria-hidden="true"></span>NREM 2</td>
+                  <td><strong>Sleep Spindles + K-complexes</strong></td>
+                  <td>12–16 Hz bursts</td>
+                  <td>True sleep; memory gating; sensory inhibition</td>
+                </tr>
+                <tr>
+                  <td><span class="wave-dot" style="background:#c8b8ff;" aria-hidden="true"></span>NREM 3</td>
+                  <td><strong>Delta</strong></td>
+                  <td>0.5–4 Hz</td>
+                  <td>Deep slow-wave sleep; cellular repair; memory transfer</td>
+                </tr>
+                <tr>
+                  <td><span class="wave-dot" style="background:#f97316;" aria-hidden="true"></span>REM</td>
+                  <td><strong>Beta-like (desynchronized)</strong></td>
+                  <td>~15–30 Hz</td>
+                  <td>Paradoxical sleep; dreaming; emotional memory processing</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!-- /bw-table-wrap -->
+
+      </div><!-- /container -->
+    </section>
+
+    <!-- Wave divider: science → memory -->
+    <div class="wave-divider" aria-hidden="true" style="background:#0d1117;">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,32 C360,64 1080,0 1440,32 L1440,64 L0,64 Z" fill="#0a0f2e"/>
+      </svg>
+    </div>
+
+    <!-- ============================================================
+         MEMORY SECTION
+         ============================================================ -->
+    <section id="memory" class="section-shell bg-navy" aria-labelledby="memory-title">
+      <div class="container">
+
+        <span class="eyebrow">02 — Memory</span>
+        <h2 class="section-title" id="memory-title">Sleep &amp; Memory Consolidation</h2>
+        <p class="section-lead">
+          Memory consolidation — the process of stabilizing fragile new memories into long-term storage —
+          depends critically on sleep. It is not one process but two, orchestrated across NREM and REM
+          in a precise biological sequence your brain runs every single night.
+        </p>
+
+        <!-- ── Pathway Diagram ── -->
+        <div class="mem-diagram-wrap reveal" id="mem-diagram-wrap">
+          <h3>The Two-Stage Memory Model (Buzsáki, 1989)</h3>
+          <p>
+            During wakefulness, experiences are rapidly encoded in the <strong>hippocampus</strong>.
+            During NREM slow-wave sleep, the hippocampus "replays" these traces, transferring them to the
+            <strong>prefrontal cortex and neocortex</strong> for long-term storage. During subsequent REM,
+            those cortically stored memories are further <strong>integrated, generalized, and refined</strong>.
+          </p>
+          <div class="mem-svg-shell">
+            <svg id="mem-svg" viewBox="0 0 900 210" fill="none" xmlns="http://www.w3.org/2000/svg"
+              role="img" aria-label="Three-phase memory consolidation pathway: wakefulness encoding, NREM transfer, REM integration">
+
+              <!-- Phase background zones -->
+              <rect x="0"   y="0" width="272" height="210" rx="10" fill="rgba(255,209,102,0.04)"/>
+              <rect x="288" y="0" width="324" height="210" rx="10" fill="rgba(74,144,217,0.06)"/>
+              <rect x="628" y="0" width="272" height="210" rx="10" fill="rgba(200,184,255,0.06)"/>
+
+              <!-- Phase labels -->
+              <text x="136" y="24" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(255,209,102,0.55)" text-transform="uppercase">WAKEFULNESS</text>
+              <text x="450" y="24" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(74,144,217,0.70)">NREM SLOW-WAVE SLEEP</text>
+              <text x="764" y="24" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(200,184,255,0.60)">REM SLEEP</text>
+
+              <!-- Experience inputs (left arrows into Wake Hippocampus) -->
+              <g opacity="0.5">
+                <line x1="14" y1="95"  x2="72" y2="108" stroke="#ffd166" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <line x1="14" y1="118" x2="72" y2="118" stroke="#ffd166" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <line x1="14" y1="141" x2="72" y2="128" stroke="#ffd166" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <text x="8" y="93"  font-family="'DM Sans',system-ui" font-size="8" fill="rgba(255,209,102,0.45)" text-anchor="middle">exp.</text>
+                <text x="8" y="119" font-family="'DM Sans',system-ui" font-size="8" fill="rgba(255,209,102,0.45)" text-anchor="middle">exp.</text>
+                <text x="8" y="145" font-family="'DM Sans',system-ui" font-size="8" fill="rgba(255,209,102,0.45)" text-anchor="middle">exp.</text>
+              </g>
+
+              <!-- Wake: Hippocampus -->
+              <circle cx="136" cy="118" r="46" fill="rgba(255,209,102,0.10)" stroke="#ffd166" stroke-width="1.5"/>
+              <circle cx="136" cy="118" r="30" fill="rgba(255,209,102,0.08)" stroke="rgba(255,209,102,0.30)" stroke-width="1"/>
+              <text x="136" y="115" text-anchor="middle" font-family="'Playfair Display',Georgia" font-size="11" font-weight="700" fill="#ffd166">Hippocampus</text>
+              <text x="136" y="130" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="9" fill="rgba(255,209,102,0.65)">Encoding</text>
+              <text x="136" y="178" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="9" fill="rgba(255,209,102,0.45)">Rapid contextual encoding</text>
+
+              <!-- Arrow: Wake Hipp → NREM Hipp -->
+              <path id="arr1" class="mem-arr" style="--dl:160px"
+                d="M 182,110 C 210,102 240,96 305,96"
+                stroke="#ffd166" stroke-width="2" stroke-linecap="round" fill="none" marker-end="url(#arrowGold)"/>
+
+              <!-- NREM: Hippocampus -->
+              <circle cx="350" cy="96" r="38" fill="rgba(74,144,217,0.12)" stroke="#4a90d9" stroke-width="1.5"/>
+              <circle cx="350" cy="96" r="22" fill="rgba(74,144,217,0.08)" stroke="rgba(74,144,217,0.30)" stroke-width="1"/>
+              <text x="350" y="93"  text-anchor="middle" font-family="'Playfair Display',Georgia" font-size="10" font-weight="700" fill="#7eb8f7">Hippocampus</text>
+              <text x="350" y="107" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="8"  fill="rgba(126,184,247,0.65)">Replay</text>
+
+              <!-- Arrow: NREM Hipp → NREM Neocortex -->
+              <path id="arr2" class="mem-arr" style="--dl:120px"
+                d="M 388,110 C 420,130 450,145 512,148"
+                stroke="#4a90d9" stroke-width="2" stroke-linecap="round" fill="none" marker-end="url(#arrowBlue)"/>
+              <!-- Flowing replay label -->
+              <text x="435" y="136" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="8.5" fill="rgba(126,184,247,0.55)">SWRs + Spindles</text>
+
+              <!-- NREM: Neocortex -->
+              <circle cx="556" cy="152" r="38" fill="rgba(74,144,217,0.10)" stroke="#4a90d9" stroke-width="1.5"/>
+              <circle cx="556" cy="152" r="22" fill="rgba(74,144,217,0.07)" stroke="rgba(74,144,217,0.28)" stroke-width="1"/>
+              <text x="556" y="149" text-anchor="middle" font-family="'Playfair Display',Georgia" font-size="10" font-weight="700" fill="#7eb8f7">Neocortex</text>
+              <text x="556" y="163" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="8"  fill="rgba(126,184,247,0.65)">Storage</text>
+
+              <!-- NREM zone label -->
+              <text x="450" y="200" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="8.5" fill="rgba(126,184,247,0.40)">Hippocampus replays → transfers to neocortex</text>
+
+              <!-- Arrow: NREM Neo → REM Neo -->
+              <path id="arr3" class="mem-arr" style="--dl:160px"
+                d="M 594,145 C 625,138 660,130 715,126"
+                stroke="#c8b8ff" stroke-width="2" stroke-linecap="round" fill="none" marker-end="url(#arrowLav)"/>
+
+              <!-- REM: Neocortex -->
+              <circle cx="764" cy="118" r="46" fill="rgba(200,184,255,0.10)" stroke="#c8b8ff" stroke-width="1.5"/>
+              <circle cx="764" cy="118" r="30" fill="rgba(200,184,255,0.07)" stroke="rgba(200,184,255,0.28)" stroke-width="1"/>
+              <!-- Integration web lines -->
+              <g stroke="rgba(200,184,255,0.20)" stroke-width="0.8">
+                <line x1="748" y1="104" x2="780" y2="132"/>
+                <line x1="780" y1="104" x2="748" y2="132"/>
+                <line x1="764" y1="98"  x2="764" y2="138"/>
+              </g>
+              <text x="764" y="115" text-anchor="middle" font-family="'Playfair Display',Georgia" font-size="11" font-weight="700" fill="#c8b8ff">Neocortex</text>
+              <text x="764" y="130" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="9"  fill="rgba(200,184,255,0.65)">Integration</text>
+              <text x="764" y="178" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="9"  fill="rgba(200,184,255,0.45)">Refined, generalized, long-term</text>
+
+              <!-- Arrow marker defs -->
+              <defs>
+                <marker id="arrowGold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#ffd166"/>
+                </marker>
+                <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#4a90d9"/>
+                </marker>
+                <marker id="arrowLav" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#c8b8ff"/>
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </div><!-- /mem-diagram-wrap -->
+
+        <!-- ── Gold callout cards ── -->
+        <div class="mem-callouts reveal">
+
+          <div class="mem-callout">
+            <span class="callout-big">~40%</span>
+            <p class="callout-text">
+              reduction in hippocampal encoding activity after just one sleepless night —
+              meaning new memories simply cannot form properly.
+            </p>
+          </div>
+
+          <div class="mem-callout">
+            <span class="callout-big" style="font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.2;">Spindle density</span>
+            <p class="callout-text">
+              correlates <em>directly</em> with next-day memory recall performance.
+              More sleep spindles in NREM 2 = stronger declarative memory the following day.
+            </p>
+          </div>
+
+          <div class="mem-callout">
+            <span class="callout-big" style="font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.2;">Early SWS</span>
+            <p class="callout-text">
+              disruption — even without cutting total sleep time — selectively impairs
+              fact-based declarative memory while sparing procedural skills. Confirmed by split-night studies.
+            </p>
+          </div>
+
+        </div><!-- /mem-callouts -->
+
+        <!-- ── NREM vs REM split ── -->
+        <div class="nrem-rem-wrap reveal" id="nrem-rem-wrap">
+          <h3>What Each Stage Consolidates</h3>
+          <p>NREM and REM don't duplicate each other — they handle fundamentally different types of memory in sequence.</p>
+
+          <div class="nrem-rem-split">
+
+            <div class="split-nrem">
+              <div class="split-header">
+                <div class="split-dot" style="background:#7eb8f7;"></div>
+                <h4>NREM Slow-Wave Sleep → Declarative Memory</h4>
+              </div>
+              <div class="split-body" id="split-body-nrem">
+                <ul class="split-list" aria-label="NREM memory consolidation details">
+                  <li>Consolidates <strong>declarative memory</strong> — conscious recall of facts (semantic) and personal events (episodic)</li>
+                  <li>Hippocampal <strong>sharp-wave ripples (SWRs)</strong> coordinate with cortical slow oscillations (1–4 Hz) and sleep spindles (12–16 Hz) to transfer memory traces to the neocortex</li>
+                  <li>Disrupting early SWS selectively impairs fact-based memory without affecting procedural skills</li>
+                  <li>Concentrated in the <strong>first half of the night</strong> — skipping early sleep costs declarative consolidation most</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="split-rem">
+              <div class="split-header">
+                <div class="split-dot" style="background:#c8b8ff;"></div>
+                <h4>REM Sleep → Emotional &amp; Procedural Memory</h4>
+              </div>
+              <div class="split-body" id="split-body-rem">
+                <ul class="split-list" aria-label="REM memory consolidation details">
+                  <li>Consolidates <strong>procedural memory</strong> (motor skills, how-to knowledge) and emotional memory</li>
+                  <li>Low <strong>noradrenaline</strong> during REM creates a neurochemical environment suited to recombining emotional memories — Matthew Walker's <em>"overnight therapy"</em> hypothesis</li>
+                  <li>Hippocampal <strong>theta rhythm</strong> (5–10 Hz) organizes and prioritizes emotionally significant memories</li>
+                  <li><strong>Alcohol suppresses REM</strong> — even moderate drinking impairs procedural and emotional memory the following day</li>
+                  <li>REM periods <strong>lengthen</strong> across the night — most REM is lost by cutting sleep short in the morning</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /nrem-rem-wrap -->
+
+        <!-- ── REM Neurotransmitter callout ── -->
+        <div class="rem-neuro-callout reveal">
+          <div class="rem-neuro-icon" aria-hidden="true">🧪</div>
+          <div>
+            <h4>The Neurochemistry of REM: Why It Works as "Overnight Therapy"</h4>
+            <p>
+              During REM sleep, the brain is almost completely devoid of <strong>noradrenaline</strong> —
+              the neurochemical associated with stress and anxiety. This creates a uniquely safe
+              environment to reprocess emotionally charged memories: the content is replayed and
+              integrated, but the <em>emotional charge</em> is gradually stripped away. This is why
+              traumatic or upsetting experiences often feel less raw after a full night's sleep.
+              Disrupting REM — as alcohol reliably does — blocks this process entirely.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /container -->
+    </section>
+
+    <!-- Wave divider: memory → mental health -->
+    <div class="wave-divider" aria-hidden="true" style="background:var(--c-navy);">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C480,64 960,0 1440,48 L1440,64 L0,64 Z" fill="#0d1117"/>
+      </svg>
+    </div>
+    <!-- ============================================================
+         MENTAL HEALTH SECTION
+         ============================================================ -->
+    <section id="mental-health" class="section-shell bg-dark" aria-labelledby="mh-title">
+      <div class="container">
+
+        <span class="eyebrow">03 — Mental Health</span>
+        <h2 class="section-title" id="mh-title">Sleep &amp; Mental Health</h2>
+        <p class="section-lead">
+          The relationship between sleep and mental health is <strong>bidirectional</strong>:
+          poor sleep worsens mental health conditions, and mental health conditions worsen sleep.
+          This self-reinforcing cycle is one of the most clinically important areas in psychiatry today.
+        </p>
+
+        <!-- ── Bidirectional cycle diagram ── -->
+        <div class="bidir-wrap reveal">
+          <h3>The Self-Reinforcing Cycle</h3>
+          <p>Neither condition is merely a symptom of the other — each causally drives the other,
+          creating a loop that can be broken only by treating both simultaneously.</p>
+          <div class="bidir-diagram">
+            <svg id="bidir-svg" viewBox="0 0 640 150" fill="none" xmlns="http://www.w3.org/2000/svg"
+              role="img" aria-label="Bidirectional diagram: poor sleep worsens mental health, mental health conditions disrupt sleep">
+
+              <!-- Left node: Sleep -->
+              <rect x="20"  y="42" width="175" height="66" rx="13"
+                fill="rgba(126,184,247,0.10)" stroke="#7eb8f7" stroke-width="1.5"/>
+              <text x="107" y="70" text-anchor="middle" font-family="'Playfair Display',Georgia" font-size="14" font-weight="700" fill="#7eb8f7">Poor Sleep</text>
+              <text x="107" y="89" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="10" fill="rgba(126,184,247,0.60)">&amp; Sleep Loss</text>
+
+              <!-- Right node: Mental Health -->
+              <rect x="445" y="42" width="175" height="66" rx="13"
+                fill="rgba(200,184,255,0.10)" stroke="#c8b8ff" stroke-width="1.5"/>
+              <text x="532" y="70" text-anchor="middle" font-family="'Playfair Display',Georgia" font-size="14" font-weight="700" fill="#c8b8ff">Mental Health</text>
+              <text x="532" y="89" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="10" fill="rgba(200,184,255,0.60)">Conditions</text>
+
+              <!-- Top arrow: Sleep → Mental Health (worsens) -->
+              <path d="M 195,60 C 280,22 360,22 445,60"
+                stroke="#ffd166" stroke-width="2.2" stroke-linecap="round" fill="none"
+                marker-end="url(#bdArrowGold)">
+                <animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.3s" repeatCount="indefinite"/>
+              </path>
+              <!-- make it dashed via stroke-dasharray on a sibling path -->
+              <path d="M 195,60 C 280,22 360,22 445,60"
+                stroke="#ffd166" stroke-width="2.2" stroke-linecap="round"
+                stroke-dasharray="7 5" fill="none" opacity="0.8">
+                <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.3s" repeatCount="indefinite"/>
+              </path>
+              <text x="320" y="17" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="10" font-weight="600" fill="rgba(255,209,102,0.65)">Worsens →</text>
+
+              <!-- Bottom arrow: Mental Health → Sleep (disrupts) -->
+              <path d="M 445,90 C 360,128 280,128 195,90"
+                stroke="#f97316" stroke-width="2.2" stroke-linecap="round" fill="none"
+                marker-end="url(#bdArrowOrange)">
+                <animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.3s" repeatCount="indefinite"/>
+              </path>
+              <path d="M 445,90 C 360,128 280,128 195,90"
+                stroke="#f97316" stroke-width="2.2" stroke-linecap="round"
+                stroke-dasharray="7 5" fill="none" opacity="0.8">
+                <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.3s" repeatCount="indefinite"/>
+              </path>
+              <text x="320" y="146" text-anchor="middle" font-family="'DM Sans',system-ui" font-size="10" font-weight="600" fill="rgba(249,115,22,0.65)">← Disrupts</text>
+
+              <defs>
+                <marker id="bdArrowGold"   markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffd166"/></marker>
+                <marker id="bdArrowOrange" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f97316"/></marker>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ── Neurotransmitter cards ── -->
+        <h3 style="margin-bottom:8px;">Neurotransmitter Disruption from Sleep Loss</h3>
+        <p class="neuro-intro">
+          Sleep deprivation doesn't just make you tired — it simultaneously dysregulates
+          <strong>five major neurotransmitter systems</strong>, each with distinct consequences for mood,
+          motivation, and emotional control.
+        </p>
+        <div class="neuro-grid" id="neuro-grid" aria-label="Neurotransmitter effects of sleep loss">
+
+          <div class="neuro-card" style="border-top:3px solid #60a5fa;">
+            <span class="neuro-icon" aria-hidden="true">😔</span>
+            <div class="neuro-name" style="color:#60a5fa;">Serotonin</div>
+            <p class="neuro-effect">Sleep deprivation reduces serotonin receptor sensitivity, increasing vulnerability to depression and anxiety. The brain becomes less responsive to its own mood-stabilizing signals.</p>
+          </div>
+
+          <div class="neuro-card" style="border-top:3px solid #f97316;">
+            <span class="neuro-icon" aria-hidden="true">⚡</span>
+            <div class="neuro-name" style="color:#f97316;">Dopamine</div>
+            <p class="neuro-effect">Initially elevated during acute sleep loss — producing false alertness — then depleted with chronic deprivation, reducing motivation and reward processing.</p>
+          </div>
+
+          <div class="neuro-card" style="border-top:3px solid #ef4444;">
+            <span class="neuro-icon" aria-hidden="true">⚠️</span>
+            <div class="neuro-name" style="color:#ef4444;">Norepinephrine</div>
+            <p class="neuro-effect">Remains chronically elevated during sleep loss, keeping the brain locked in a sustained fight-or-flight state — heightening anxiety and emotional reactivity.</p>
+          </div>
+
+          <div class="neuro-card" style="border-top:3px solid #4ade80;">
+            <span class="neuro-icon" aria-hidden="true">🛑</span>
+            <div class="neuro-name" style="color:#4ade80;">GABA</div>
+            <p class="neuro-effect">The brain's primary inhibitory neurotransmitter decreases with sleep loss, producing restlessness, agitation, and the emotional dysregulation characteristic of severe insomnia.</p>
+          </div>
+
+          <div class="neuro-card" style="border-top:3px solid #fbbf24;">
+            <span class="neuro-icon" aria-hidden="true">📈</span>
+            <div class="neuro-name" style="color:#fbbf24;">Cortisol (HPA Axis)</div>
+            <p class="neuro-effect">Sleep deprivation dysregulates the HPA axis: elevated evening cortisol, blunted morning awakening response, and persistent dysregulation worsen anxiety and emotional fatigue.</p>
+          </div>
+
+        </div><!-- /neuro-grid -->
+
+        <!-- ── Amygdala / PFC Toggle ── -->
+        <div class="amyg-wrap reveal" id="amyg-wrap">
+          <h3>Amygdala Hyperreactivity: The Severed Brake</h3>
+          <p>
+            One of the most consistent findings in sleep neuroscience: sleep-deprived individuals show
+            <strong>up to 60% greater amygdala reactivity</strong> to negative stimuli, combined with
+            <em>reduced</em> connectivity to the prefrontal cortex — the brain's emotion regulator.
+            Toggle between states to see what sleep loss does to this critical circuit.
+          </p>
+
+          <div class="amyg-toggle-row" role="group" aria-label="Brain state selector">
+            <button class="amyg-btn rested-btn active-rested" id="btn-rested"   aria-pressed="true" >Well Rested</button>
+            <button class="amyg-btn deprived-btn"             id="btn-deprived" aria-pressed="false">Sleep Deprived</button>
+          </div>
+
+          <div class="amyg-panel">
+            <div class="amyg-regions">
+
+              <!-- Amygdala -->
+              <div class="amyg-region amygdala-box" id="amyg-box">
+                <span class="region-icon" aria-hidden="true">🔥</span>
+                <div class="region-name">Amygdala</div>
+                <div class="region-role">Emotion detection &amp; threat response — fires on negative stimuli</div>
+                <span class="region-badge" id="amyg-badge" style="background:rgba(74,222,128,0.15);color:#4ade80;">Normal Reactivity</span>
+              </div>
+
+              <!-- Connection meter -->
+              <div class="conn-center">
+                <div class="conn-label">Connection Strength</div>
+                <div class="conn-track" aria-label="Connection strength between amygdala and prefrontal cortex">
+                  <div class="conn-fill" id="conn-fill" style="width:88%;background:#4ade80;"></div>
+                </div>
+                <div class="conn-status" id="conn-status" style="color:#4ade80;">STRONG REGULATION</div>
+              </div>
+
+              <!-- PFC -->
+              <div class="amyg-region pfc-box">
+                <span class="region-icon" aria-hidden="true">🧠</span>
+                <div class="region-name">Prefrontal Cortex</div>
+                <div class="region-role">Emotion regulation — dampens amygdala responses via top-down control</div>
+                <span class="region-badge" id="pfc-badge" style="background:rgba(74,222,128,0.15);color:#4ade80;">Active &amp; Effective</span>
+              </div>
+
+            </div><!-- /amyg-regions -->
+            <p id="amyg-caption" style="margin-top:20px;font-size:.85rem;color:rgba(244,240,255,.50);text-align:center;">
+              With adequate sleep, the prefrontal cortex maintains strong inhibitory control over the amygdala — you can regulate your emotional responses effectively.
+            </p>
+          </div><!-- /amyg-panel -->
+        </div><!-- /amyg-wrap -->
+
+        <!-- ── Stat boxes ── -->
+        <div class="mh-stats">
+          <div class="mh-stat reveal">
+            <span class="mh-stat-big">Up to 60%</span>
+            <p>greater amygdala reactivity to negative stimuli in sleep-deprived individuals — combined with reduced prefrontal cortex connectivity, leaving people emotionally reactive and impulsive. <em>(Palmer et al., 2024, Psychological Bulletin)</em></p>
+          </div>
+          <div class="mh-stat reveal" style="border-left-color:var(--c-gold);">
+            <span class="mh-stat-big">40–60%</span>
+            <p>of patients with major depressive disorder (MDD) experience a <strong>temporary antidepressant effect</strong> from total sleep deprivation — evidence that sleep regulation and mood are deeply intertwined neurobiologically. The effect reverses after recovery sleep.</p>
+          </div>
+        </div>
+
+      </div><!-- /container -->
+    </section>
+
+    <!-- Wave divider: mental health → disorders -->
+    <div class="wave-divider" aria-hidden="true" style="background:#0d1117;">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,48 C360,0 1080,64 1440,16 L1440,64 L0,64 Z" fill="#0a0f2e"/>
+      </svg>
+    </div>
+    <!-- ============================================================
+         DISORDERS SECTION
+         ============================================================ -->
+    <section id="disorders" class="section-shell bg-navy" aria-labelledby="disorders-title">
+      <div class="container">
+
+        <span class="eyebrow">04 — Disorders</span>
+        <h2 class="section-title" id="disorders-title">Sleep Disorders (DSM-5)</h2>
+        <p class="section-lead">
+          The DSM-5 classifies Sleep-Wake Disorders into 10 diagnostic groups. Across all of them,
+          the core features are the same: dissatisfaction with sleep quality, timing, or amount —
+          resulting in daytime distress and functional impairment. <strong>Hover or tap a card to flip it.</strong>
+        </p>
+
+        <div class="disorders-grid" role="list" aria-label="Five sleep disorders — hover or tap each card for details">
+
+          <!-- 1. INSOMNIA -->
+          <div class="flip-card dc-insomnia reveal" role="listitem" tabindex="0"
+            aria-label="Insomnia Disorder — click to flip for details">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <span class="flip-front-icon" aria-hidden="true">🌙</span>
+                <div class="flip-front-name">Insomnia Disorder</div>
+                <p class="flip-front-hook">Persistent difficulty initiating or maintaining sleep despite adequate opportunity — the most common sleep disorder.</p>
+                <span class="flip-hint" aria-hidden="true">hover / tap to flip</span>
+              </div>
+              <div class="flip-back" aria-hidden="true">
+                <span class="flip-dsm-badge">DSM-5: Primary Sleep-Wake Disorder</span>
+                <div class="flip-back-name">Insomnia Disorder</div>
+
+                <div class="flip-back-section">Prevalence</div>
+                <p class="flip-back-text">4–22% of adults meet full criteria; 40–50% of those with comorbid mental illness report symptoms.</p>
+
+                <div class="flip-back-section">DSM-5 Criteria</div>
+                <ul class="flip-back-list">
+                  <li>Occurs ≥3 nights per week</li>
+                  <li>Present for ≥3 months (chronic specifier)</li>
+                  <li>Significant daytime distress or impairment</li>
+                  <li>Not explained by another disorder or substance</li>
+                </ul>
+
+                <div class="flip-back-section">Psychological Mechanism</div>
+                <p class="flip-back-text">Hyperarousal (cognitive &amp; physiological), maladaptive beliefs ("I need 8 perfect hours or tomorrow is ruined"), conditioned arousal to the bedroom, anxiety and rumination.</p>
+
+                <div class="flip-treatment"><strong>Treatment:</strong> CBT-I first-line · benzodiazepine receptor agonists (short-term) · melatonin receptor agonists</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. NARCOLEPSY -->
+          <div class="flip-card dc-narcolepsy reveal reveal-delay-1" role="listitem" tabindex="0"
+            aria-label="Narcolepsy — click to flip for details">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <span class="flip-front-icon" aria-hidden="true">⚡</span>
+                <div class="flip-front-name">Narcolepsy</div>
+                <p class="flip-front-hook">Hypocretin (orexin) deficiency causes uncontrollable daytime sleep attacks and REM intrusion into wakefulness.</p>
+                <span class="flip-hint" aria-hidden="true">hover / tap to flip</span>
+              </div>
+              <div class="flip-back" aria-hidden="true">
+                <span class="flip-dsm-badge">DSM-5: CNS Hypersomnia Disorder</span>
+                <div class="flip-back-name">Narcolepsy</div>
+
+                <div class="flip-back-section">Prevalence &amp; Cause</div>
+                <p class="flip-back-text">Affects 1 in 2,000; often underdiagnosed. In Type 1, 90–95% of hypocretin neurons are destroyed — likely autoimmune. Without hypocretin, the brain cannot maintain stable wakefulness.</p>
+
+                <div class="flip-back-section">Key Symptoms</div>
+                <ul class="flip-back-list">
+                  <li><strong>Cataplexy:</strong> sudden bilateral muscle-tone loss triggered by strong emotion (laughing, surprise)</li>
+                  <li><strong>Sleep paralysis:</strong> temporary inability to move at sleep onset/awakening</li>
+                  <li><strong>Hypnagogic hallucinations:</strong> vivid dream-like hallucinations while semi-conscious</li>
+                  <li><strong>Excessive Daytime Sleepiness (EDS)</strong></li>
+                </ul>
+
+                <div class="flip-treatment"><strong>Treatment:</strong> Modafinil · sodium oxybate · scheduled naps · SSRIs/SNRIs for cataplexy</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. SLEEP APNEA -->
+          <div class="flip-card dc-apnea reveal reveal-delay-2" role="listitem" tabindex="0"
+            aria-label="Obstructive Sleep Apnea — click to flip for details">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <span class="flip-front-icon" aria-hidden="true">😮‍💨</span>
+                <div class="flip-front-name">Obstructive Sleep Apnea</div>
+                <p class="flip-front-hook">Repeated upper airway obstruction stops breathing dozens of times per hour — severely fragmenting sleep architecture.</p>
+                <span class="flip-hint" aria-hidden="true">hover / tap to flip</span>
+              </div>
+              <div class="flip-back" aria-hidden="true">
+                <span class="flip-dsm-badge">DSM-5: Breathing-Related Sleep Disorder</span>
+                <div class="flip-back-name">Obstructive Sleep Apnea</div>
+
+                <div class="flip-back-section">Prevalence</div>
+                <p class="flip-back-text">15–30% of males · 10–15% of females. Criteria: ≥5 obstructive apneas or hypopneas per hour on polysomnography.</p>
+
+                <div class="flip-back-section">Psychological Consequences</div>
+                <ul class="flip-back-list">
+                  <li>Chronic sleep fragmentation prevents adequate SWS and REM</li>
+                  <li>Memory impairment, mood disturbances, cognitive dysfunction</li>
+                  <li>Significantly elevated risk of depression</li>
+                  <li>Comorbid with hypertension, type 2 diabetes, cardiovascular disease</li>
+                </ul>
+
+                <div class="flip-treatment"><strong>Treatment:</strong> CPAP (Continuous Positive Airway Pressure) — gold standard; maintains open airway throughout the night</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. RBD -->
+          <div class="flip-card dc-rbd reveal reveal-delay-3" role="listitem" tabindex="0"
+            aria-label="REM Sleep Behavior Disorder — click to flip for details">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <span class="flip-front-icon" aria-hidden="true">🥊</span>
+                <div class="flip-front-name">REM Sleep Behavior Disorder</div>
+                <p class="flip-front-hook">Loss of REM muscle atonia causes people to physically act out their dreams — sometimes violently.</p>
+                <span class="flip-hint" aria-hidden="true">hover / tap to flip</span>
+              </div>
+              <div class="flip-back" aria-hidden="true">
+                <span class="flip-dsm-badge">DSM-5: Parasomnia — REM Sleep Disorder</span>
+                <div class="flip-back-name">REM Sleep Behavior Disorder (RBD)</div>
+
+                <div class="flip-back-section">Prevalence</div>
+                <p class="flip-back-text">Rare; predominantly affects men over 50. Confirmed by PSG showing REM without atonia.</p>
+
+                <div class="flip-back-section">Clinical Significance</div>
+                <ul class="flip-back-list">
+                  <li>Prodromal marker for <strong>Parkinson's disease</strong> and Lewy body dementia</li>
+                  <li>Up to 80% of those with idiopathic RBD develop a neurodegenerative disease within 10–15 years</li>
+                  <li>One of the most prognostically significant sleep disorders in medicine</li>
+                </ul>
+
+                <div class="flip-back-section">Mechanism</div>
+                <p class="flip-back-text">Normal REM atonia (muscle paralysis) is absent — the brainstem circuits that suppress motor output during REM fail, allowing dream content to be acted out physically.</p>
+
+                <div class="flip-treatment"><strong>Treatment:</strong> Clonazepam · high-dose melatonin · bedroom safety modifications</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. SLEEPWALKING -->
+          <div class="flip-card dc-sleep reveal reveal-delay-4" role="listitem" tabindex="0"
+            aria-label="Somnambulism (Sleepwalking) — click to flip for details">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <span class="flip-front-icon" aria-hidden="true">🚶</span>
+                <div class="flip-front-name">Somnambulism (Sleepwalking)</div>
+                <p class="flip-front-hook">Incomplete arousal from NREM Stage 3 — complex behaviors performed in a dissociated state, partially asleep.</p>
+                <span class="flip-hint" aria-hidden="true">hover / tap to flip</span>
+              </div>
+              <div class="flip-back" aria-hidden="true">
+                <span class="flip-dsm-badge">DSM-5: NREM Sleep Arousal Disorder</span>
+                <div class="flip-back-name">Somnambulism (Sleepwalking)</div>
+
+                <div class="flip-back-section">Prevalence &amp; Timing</div>
+                <p class="flip-back-text">1–15% of the general population; peaks at age 11–12. Occurs predominantly in the first third of the night — when slow-wave sleep is most concentrated. No memory of the episode upon waking.</p>
+
+                <div class="flip-back-section">Key Characteristics</div>
+                <ul class="flip-back-list">
+                  <li>Not acting out a dream (unlike RBD) — NREM 3 does not involve dreaming</li>
+                  <li>Eyes typically open, glazed; vague awareness of surroundings</li>
+                  <li>Triggered by: sleep deprivation, fever, stress, alcohol, zolpidem</li>
+                  <li>Genetics: <strong>5× greater risk</strong> if a first-degree relative has the disorder</li>
+                </ul>
+
+                <div class="flip-treatment"><strong>Treatment:</strong> Sleep hygiene · safety modifications · benzodiazepines in severe cases</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /disorders-grid -->
+
+      </div><!-- /container -->
+    </section>
+
+    <!-- Wave divider: disorders → deprivation -->
+    <div class="wave-divider" aria-hidden="true" style="background:var(--c-navy);">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,20 C360,64 1080,0 1440,44 L1440,64 L0,64 Z" fill="#0d1117"/>
+      </svg>
+    </div>
+    <section id="deprivation">
+      <div class="container">
+
+        <h2 class="section-title reveal">The Cost of Sleep Deprivation</h2>
+        <p class="section-lead reveal">A progressive cascade of cognitive, emotional, and physical breakdown — documented hour by hour.</p>
+
+        <!-- BAC warning box -->
+        <div class="dep-bac-box reveal" style="margin-bottom:52px;">
+          <div class="dep-bac-icon">⚠️</div>
+          <p><strong>24 hours awake = BAC of 0.10%</strong> — above the legal driving limit in every U.S. state. Yet we rarely treat sleeplessness with the same seriousness as drunk driving.</p>
+        </div>
+
+        <!-- Timeline wrapper -->
+        <div class="dep-layout" id="depTimeline">
+
+          <!-- Spine SVG (left column, absolute-positioned) -->
+          <svg class="dep-spine-svg" id="depSpine" aria-hidden="true" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="spineGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#ffd166"/>
+                <stop offset="33%"  stop-color="#f97316"/>
+                <stop offset="66%"  stop-color="#ef4444"/>
+                <stop offset="100%" stop-color="#7f1d1d"/>
+              </linearGradient>
+            </defs>
+            <line id="depSpineLine" x1="2" y1="0" x2="2" y2="0"/>
+          </svg>
+
+          <!-- Nodes column -->
+          <div class="dep-nodes-col" id="depNodes">
+
+            <!-- 24 hr node -->
+            <div class="dep-node-wrap" data-dep-node>
+              <div class="dep-node-dot-col">
+                <div class="dep-dot dep-dot-24"></div>
+              </div>
+              <div class="dep-card dep-card-24">
+                <h3>24 Hours Awake <span class="dep-badge">THRESHOLD</span></h3>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Cognitive</div>
+                  <ul class="dep-symptom-list">
+                    <li>Impaired attention, concentration, and short-term memory</li>
+                    <li>Reaction time equivalent to BAC 0.10%</li>
+                    <li>Microsleeps begin — brief, involuntary sleep episodes</li>
+                  </ul>
+                </div>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Emotional</div>
+                  <ul class="dep-symptom-list">
+                    <li>Elevated irritability and anxiety</li>
+                    <li>Early perceptual distortions; temporal disorientation</li>
+                    <li>Depersonalization begins</li>
+                  </ul>
+                </div>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Physical</div>
+                  <ul class="dep-symptom-list">
+                    <li>Elevated inflammatory markers</li>
+                    <li>Dysregulated cortisol; ghrelin rises, leptin falls</li>
+                  </ul>
+                </div>
+                <!-- Microsleep callout -->
+                <div class="dep-microsleep">
+                  <div class="dep-microsleep-icon">💤</div>
+                  <p><strong>176 feet</strong> at 60 mph in 2 seconds — the distance a car travels during a single microsleep, with <strong>zero cognitive awareness</strong>.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 48 hr node -->
+            <div class="dep-node-wrap" data-dep-node>
+              <div class="dep-node-dot-col">
+                <div class="dep-dot dep-dot-48"></div>
+              </div>
+              <div class="dep-card dep-card-48">
+                <h3>48 Hours Awake <span class="dep-badge">SEVERE</span></h3>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Cognitive</div>
+                  <ul class="dep-symptom-list">
+                    <li>Microsleeps extend up to 30 seconds</li>
+                    <li>Motor coordination significantly declines</li>
+                    <li>Vigilance severely impaired; error rates spike</li>
+                  </ul>
+                </div>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Emotional / Perceptual</div>
+                  <ul class="dep-symptom-list">
+                    <li>Complex hallucinations: visual (90%), somatosensory (52%), auditory (33%)</li>
+                    <li>Visual metamorphopsias — objects appear distorted</li>
+                    <li>Disordered thinking; severe anxiety and mood swings</li>
+                  </ul>
+                </div>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Physical</div>
+                  <ul class="dep-symptom-list">
+                    <li>Natural killer (NK) cell activity decreases — immune suppression</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- 72 hr node -->
+            <div class="dep-node-wrap" data-dep-node>
+              <div class="dep-node-dot-col">
+                <div class="dep-dot dep-dot-72"></div>
+              </div>
+              <div class="dep-card dep-card-72">
+                <h3>72 Hours Awake <span class="dep-badge">CRITICAL</span></h3>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Cognitive</div>
+                  <ul class="dep-symptom-list">
+                    <li>Near-total cognitive dysfunction</li>
+                    <li>Cannot perform complex reasoning or multi-step tasks</li>
+                  </ul>
+                </div>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Emotional / Perceptual</div>
+                  <ul class="dep-symptom-list">
+                    <li>Delusions develop alongside hallucinations in all 3 modalities</li>
+                    <li>Resembles acute psychosis and toxic delirium</li>
+                    <li>Extreme and uncontrollable mood disturbances</li>
+                  </ul>
+                </div>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">Physical</div>
+                  <ul class="dep-symptom-list">
+                    <li>Elevated heart rate; severe motor impairment</li>
+                    <li>Confirmed in 12-astronaut sleep deprivation study</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- 96 hr+ node -->
+            <div class="dep-node-wrap" style="margin-bottom:0;" data-dep-node>
+              <div class="dep-node-dot-col">
+                <div class="dep-dot dep-dot-96"></div>
+              </div>
+              <div class="dep-card dep-card-96">
+                <h3>96+ Hours Awake <span class="dep-badge">EXTREME</span></h3>
+                <div class="dep-symptom-group">
+                  <div class="dep-symptom-label">All Systems</div>
+                  <ul class="dep-symptom-list">
+                    <li>The brain's urge to sleep becomes uncontrollable</li>
+                    <li>Microsleeps may last several minutes at a time</li>
+                    <li>The boundary between sleep and waking fully dissolves</li>
+                    <li>No known human has survived indefinite total sleep deprivation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /dep-nodes-col -->
+        </div><!-- /dep-layout -->
+
+      </div><!-- /container -->
+    </section>
+    <!-- Wave divider: deprivation → improve -->
+    <div class="wave-divider" aria-hidden="true" style="background:#0d1117;">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,32 C480,0 960,64 1440,20 L1440,64 L0,64 Z" fill="var(--c-navy)"/>
+      </svg>
+    </div>
+
+    <section id="improve">
+      <div class="container">
+
+        <h2 class="section-title reveal">How to Actually Improve Your Sleep</h2>
+        <p class="section-lead reveal">Cognitive Behavioral Therapy for Insomnia (CBT-I) is the first-line, evidence-based treatment — more effective than sleep medications with no side effects.</p>
+
+        <!-- Tab strip -->
+        <div class="cbt-tabs reveal" role="tablist" aria-label="CBT-I techniques">
+          <button class="cbt-tab active" role="tab" aria-selected="true"  data-tab="restriction">Sleep Restriction</button>
+          <button class="cbt-tab"        role="tab" aria-selected="false" data-tab="stimulus">Stimulus Control</button>
+          <button class="cbt-tab"        role="tab" aria-selected="false" data-tab="cognitive">Cognitive Restructuring</button>
+          <button class="cbt-tab"        role="tab" aria-selected="false" data-tab="hygiene">Sleep Hygiene</button>
+          <button class="cbt-tab"        role="tab" aria-selected="false" data-tab="relaxation">Relaxation Training</button>
+        </div>
+
+        <!-- Tab panels -->
+        <div class="cbt-panel active reveal" id="tab-restriction" role="tabpanel">
+          <div class="cbt-panel-inner">
+            <h3>Sleep Restriction Therapy</h3>
+            <p>Restrict time in bed (TIB) to match your actual sleep time — even if that's only 5–6 hours — to rapidly build <strong>homeostatic sleep pressure</strong>. Once sleep efficiency exceeds <strong>85%</strong> for five consecutive nights, extend TIB by 15 minutes.</p>
+            <p>Counterintuitively, spending less time in bed creates deeper, more consolidated sleep faster than any medication. The resulting sleep debt makes falling asleep nearly effortless.</p>
+          </div>
+        </div>
+
+        <div class="cbt-panel" id="tab-stimulus" role="tabpanel">
+          <div class="cbt-panel-inner">
+            <h3>Stimulus Control</h3>
+            <p>The bed must become a conditioned cue for sleep — not wakefulness, worry, or scrolling. Rules: <strong>use the bed only for sleep and sex</strong>. If you haven't fallen asleep within 20 minutes, get up and do something calm in dim light until sleepy, then return.</p>
+            <p>Maintain a <strong>consistent wake time every day</strong> — including weekends. This anchors your circadian rhythm and is the single most powerful thing you can do for sleep quality.</p>
+          </div>
+        </div>
+
+        <div class="cbt-panel" id="tab-cognitive" role="tabpanel">
+          <div class="cbt-panel-inner">
+            <h3>Cognitive Restructuring</h3>
+            <p>Identify and challenge dysfunctional beliefs about sleep. Common examples: <em>"I must get 8 hours or I'll fail tomorrow,"</em> <em>"I'm a terrible sleeper and there's nothing I can do,"</em> or <em>"I didn't sleep at all last night."</em></p>
+            <p>Replace catastrophic thoughts with <strong>accurate, balanced alternatives</strong>: one bad night has minimal cognitive impact; sleep time is consistently underestimated; worry about sleep is more damaging than the sleep loss itself. Keep a thought record to track and reframe sleep-related anxiety.</p>
+          </div>
+        </div>
+
+        <div class="cbt-panel" id="tab-hygiene" role="tabpanel">
+          <div class="cbt-panel-inner">
+            <h3>Sleep Hygiene</h3>
+            <p>Environmental and behavioral factors that set the stage for quality sleep:</p>
+            <p>• <strong>Temperature:</strong> 65–68°F is optimal for core body cooling, which triggers sleep onset.<br>
+               • <strong>Light:</strong> Blue light suppresses melatonin by up to <strong>50%</strong> — avoid screens 1–2 hours before bed.<br>
+               • <strong>Caffeine:</strong> Half-life of 5–7 hours — no caffeine after <strong>2 PM</strong>.<br>
+               • <strong>Alcohol:</strong> Suppresses REM sleep and causes sleep fragmentation in the second half of the night.<br>
+               • <strong>Wind-down:</strong> A consistent 30–60 minute routine signals the brain that sleep is approaching.</p>
+          </div>
+        </div>
+
+        <div class="cbt-panel" id="tab-relaxation" role="tabpanel">
+          <div class="cbt-panel-inner">
+            <h3>Relaxation Training</h3>
+            <p><strong>Progressive Muscle Relaxation (PMR):</strong> Systematically tense and release each muscle group from feet to face. Activates the parasympathetic nervous system, reducing the physiological arousal that delays sleep onset.</p>
+            <p><strong>Diaphragmatic Breathing:</strong> Slow, deep breaths (4-count inhale, 6-count exhale) lower heart rate and cortisol. The extended exhale activates the vagus nerve, triggering the relaxation response.</p>
+            <p><strong>Mindfulness:</strong> Observe racing thoughts without engaging them. Reduces the hyperarousal that sustains insomnia by decoupling wakefulness from cognitive rumination.</p>
+          </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="cbt-checklist-wrap reveal">
+          <h3>Sleep Hygiene Checklist</h3>
+          <ul class="cbt-checklist" id="cbtChecklist">
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">I go to bed and wake up at the same time every day</span>
+            </li>
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">My bedroom is dark, cool (65–68°F), and quiet</span>
+            </li>
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">I avoid screens 1–2 hours before bed</span>
+            </li>
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">I skip caffeine after 2 PM</span>
+            </li>
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">I avoid alcohol within 3 hours of bedtime</span>
+            </li>
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">I exercise regularly (but not within 3 hours of bedtime)</span>
+            </li>
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">I have a consistent 30–60 min wind-down routine</span>
+            </li>
+            <li class="cbt-check-item" data-check>
+              <div class="cbt-check-box">
+                <svg class="cbt-check-tick" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
+              </div>
+              <span class="cbt-check-label">I only use my bed for sleep (and sex)</span>
+            </li>
+          </ul>
+          <div class="cbt-tally">
+            <span id="cbtTallyText">0 / 8 habits</span>
+            <div class="cbt-tally-bar"><div class="cbt-tally-fill" id="cbtTallyFill"></div></div>
+          </div>
+        </div>
+
+        <!-- Quiz -->
+        <div class="cbt-quiz-wrap reveal">
+          <h3>Quick Sleep Score</h3>
+          <p class="cbt-quiz-lead">Answer honestly — your habits, not your aspirations.</p>
+
+          <div class="cbt-question" data-q="1" data-yes="1" data-no="0">
+            <span class="cbt-q-text">Do you wake up at the same time every day (including weekends)?</span>
+            <div class="cbt-q-btns">
+              <button class="cbt-q-btn" data-answer="yes">Yes</button>
+              <button class="cbt-q-btn" data-answer="no">No</button>
+            </div>
+          </div>
+          <div class="cbt-question" data-q="2" data-yes="-1" data-no="0">
+            <span class="cbt-q-text">Do you use screens within 1 hour of going to bed?</span>
+            <div class="cbt-q-btns">
+              <button class="cbt-q-btn" data-answer="yes">Yes</button>
+              <button class="cbt-q-btn" data-answer="no">No</button>
+            </div>
+          </div>
+          <div class="cbt-question" data-q="3" data-yes="-1" data-no="0">
+            <span class="cbt-q-text">Do you consume caffeine after 2 PM?</span>
+            <div class="cbt-q-btns">
+              <button class="cbt-q-btn" data-answer="yes">Yes</button>
+              <button class="cbt-q-btn" data-answer="no">No</button>
+            </div>
+          </div>
+          <div class="cbt-question" data-q="4" data-yes="-1" data-no="0">
+            <span class="cbt-q-text">Do you drink alcohol within 3 hours of bedtime?</span>
+            <div class="cbt-q-btns">
+              <button class="cbt-q-btn" data-answer="yes">Yes</button>
+              <button class="cbt-q-btn" data-answer="no">No</button>
+            </div>
+          </div>
+          <div class="cbt-question" data-q="5" data-yes="-1" data-no="0">
+            <span class="cbt-q-text">Do you often have racing thoughts when trying to fall asleep?</span>
+            <div class="cbt-q-btns">
+              <button class="cbt-q-btn" data-answer="yes">Yes</button>
+              <button class="cbt-q-btn" data-answer="no">No</button>
+            </div>
+          </div>
+
+          <div class="cbt-quiz-result" id="cbtResult" role="alert" aria-live="polite">
+            <div class="cbt-result-label" id="cbtResultLabel"></div>
+            <div class="cbt-result-text"  id="cbtResultText"></div>
+          </div>
+        </div>
+
+      </div><!-- /container -->
+    </section>
+    <!-- Wave divider: improve → references -->
+    <div class="wave-divider" aria-hidden="true" style="background:var(--c-navy);">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,44 C360,0 1080,64 1440,20 L1440,64 L0,64 Z" fill="#0d1117"/>
+      </svg>
+    </div>
+
+    <section id="references">
+      <div class="container">
+
+        <h2 class="section-title reveal">References</h2>
+        <p class="section-lead reveal">All claims in this project are grounded in peer-reviewed research, clinical guidelines, and government health data.</p>
+
+        <ul class="ref-list" id="refList">
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-book">Book</span>
+            <span class="ref-text">American Psychiatric Association. (2013). <em>Diagnostic and Statistical Manual of Mental Disorders (5th ed.).</em> APA Publishing.</span>
+          </li>
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-govt">Govt Data</span>
+            <span class="ref-text">Centers for Disease Control and Prevention. (2022). <em>Behavioral Risk Factor Surveillance System (BRFSS): Sleep data.</em> U.S. Department of Health and Human Services.</span>
+          </li>
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-clinical">Clinical Trial</span>
+            <span class="ref-text">Morin, C. M., &amp; Benca, R. (2012). Chronic insomnia. <em>The Lancet, 379</em>(9821), 1129–1141. https://doi.org/10.1016/S0140-6736(11)60750-2</span>
+          </li>
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-systematic">Systematic Review</span>
+            <span class="ref-text">Stickgold, R. (2005). Sleep-dependent memory consolidation. <em>Nature, 437</em>(7063), 1272–1278. https://doi.org/10.1038/nature04286</span>
+          </li>
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-book">Book</span>
+            <span class="ref-text">Walker, M. (2017). <em>Why We Sleep: Unlocking the Power of Sleep and Dreams.</em> Scribner.</span>
+          </li>
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-systematic">Systematic Review</span>
+            <span class="ref-text">Waters, F., Chiu, V., Atkinson, A., &amp; Blom, J. D. (2018). Severe sleep deprivation causes hallucinations and a gradual progression toward psychosis with increasing time awake. <em>Frontiers in Psychiatry, 9</em>, 303. https://doi.org/10.3389/fpsyt.2018.00303</span>
+          </li>
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-clinical">Clinical Trial</span>
+            <span class="ref-text">Schutte-Rodin, S., Broch, L., Buysse, D., Dorsey, C., &amp; Sateia, M. (2008). Clinical guideline for the evaluation and management of chronic insomnia in adults. <em>Journal of Clinical Sleep Medicine, 4</em>(5), 487–504.</span>
+          </li>
+
+          <li class="ref-item" data-ref>
+            <span class="ref-badge badge-meta">Meta-Analysis</span>
+            <span class="ref-text">Palmer, C. A., Bower, J. L., Cho, K. W., Clementi, M. A., Lau, E. Y. Y., Oosterhoff, B., &amp; Alfano, C. A. (2024). Sleep loss and emotion: A systematic review and meta-analysis of over 50 years of experimental sleep deprivation research. <em>Psychological Bulletin, 150</em>(4), 440–463. https://doi.org/10.1037/bul0000410</span>
+          </li>
+
+        </ul>
+
+      </div><!-- /container -->
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-title">The Psychology of Sleep</div>
+    <div class="footer-divider"></div>
+    <p class="footer-sub">
+      AP Psychology Final Project &nbsp;·&nbsp; All content is for educational purposes only.<br>
+      Sources: APA, CDC, Lancet, Nature, Frontiers in Psychiatry, JCSM, Psychological Bulletin.
+    </p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    /* ── Progress bar ── */
+    const progressBar = document.getElementById('progress-bar');
+    function updateProgress(){
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max>0 ? (window.scrollY/max)*100 : 0;
+      progressBar.style.width = pct+'%';
+      progressBar.setAttribute('aria-valuenow',Math.round(pct));
+    }
+
+    /* ── Navbar ── */
+    const navbar = document.getElementById('navbar');
+    function updateNavbar(){ navbar.classList.toggle('scrolled',window.scrollY>20); }
+
+    /* ── Active nav ── */
+    const navLinks      = document.querySelectorAll('.nav-link');
+    const mainSections  = document.querySelectorAll('main section[id]');
+    const sectionRatios = {};
+    function setActiveLink(id){ navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id)); }
+    mainSections.forEach(s=>
+      new IntersectionObserver(entries=>{
+        entries.forEach(e=>{ sectionRatios[e.target.id]=e.intersectionRatio; });
+        const best=Object.entries(sectionRatios).reduce((a,b)=>b[1]>a[1]?b:a,['',0]);
+        if(best[0]) setActiveLink(best[0]);
+      },{threshold:Array.from({length:21},(_,i)=>i*0.05)}).observe(s)
+    );
+
+    /* ── Mobile nav ── */
+    const hamburger  = document.getElementById('nav-hamburger');
+    const mobileNav  = document.getElementById('mobile-nav');
+    const mobLinks   = document.querySelectorAll('.mobile-nav-link');
+    function openMobile(){ hamburger.classList.add('open'); mobileNav.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileNav.setAttribute('aria-hidden','false'); mobLinks.forEach(l=>l.setAttribute('tabindex','0')); document.body.style.overflow='hidden'; }
+    function closeMobile(){ hamburger.classList.remove('open'); mobileNav.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileNav.setAttribute('aria-hidden','true'); mobLinks.forEach(l=>l.setAttribute('tabindex','-1')); document.body.style.overflow=''; }
+    hamburger.addEventListener('click',()=>mobileNav.classList.contains('open')?closeMobile():openMobile());
+    mobLinks.forEach(l=>l.addEventListener('click',closeMobile));
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&mobileNav.classList.contains('open')){ closeMobile(); hamburger.focus(); } });
+
+    /* ── Scroll handler ── */
+    let ticking=false;
+    window.addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(()=>{ updateProgress(); updateNavbar(); ticking=false; }); ticking=true; } },{passive:true});
+    updateProgress(); updateNavbar();
+
+    /* ── Stars ── */
+    (function buildStars(){
+      const c=document.getElementById('hero-particles');
+      for(let i=0;i<130;i++){
+        const s=document.createElement('div');
+        s.className='star';
+        const sz=Math.random()<.85?(Math.random()*1.8+.6):(Math.random()*3+2);
+        s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${(Math.random()*5+3).toFixed(1)}s;--delay:${(Math.random()*8).toFixed(1)}s;--op-min:${(Math.random()*.08+.04).toFixed(2)};--op-max:${(Math.random()*.55+.25).toFixed(2)};`;
+        c.appendChild(s);
+      }
+    })();
+
+    /* ── Parallax ── */
+    const heroSec  = document.getElementById('hero');
+    const heroPara = document.getElementById('hero-parallax');
+    window.addEventListener('scroll',()=>{ if(window.scrollY<heroSec.offsetHeight+200) heroPara.style.transform=`translateY(${window.scrollY*.30}px)`; },{passive:true});
+
+    /* ── Stat counters ── */
+    function easeOut(t){ return 1-Math.pow(1-t,3); }
+    function animCounter(el,target,suffix,dur){
+      const start=performance.now();
+      (function step(now){
+        const p=Math.min((now-start)/dur,1), v=easeOut(p)*target;
+        el.textContent=(target>=1e6 ? Math.round(v/1e6)+'M' : Math.round(v)+suffix);
+        if(p<1) requestAnimationFrame(step);
+        else el.textContent=(target>=1e6 ? (target/1e6)+'M' : target+suffix);
+      })(start);
+    }
+    window.addEventListener('load',()=>{
+      animCounter(document.getElementById('stat-adults'),37,'%',1800);
+      animCounter(document.getElementById('stat-teens'), 77,'%',2000);
+      animCounter(document.getElementById('stat-global'),852000000,'M',2200);
+    });
+
+    /* ── Reveal on scroll ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    },{threshold:0.12});
+    revealEls.forEach(el=>revealObs.observe(el));
+
+    /* ================================================================
+       TWO-PROCESS MODEL CANVAS
+       Draws circadian alertness (gold) and adenosine sleep pressure
+       (lavender) curves over 24 hours with an animated draw-in effect.
+    ================================================================ */
+    (function initTwoProcess(){
+      const canvas = document.getElementById('two-process-canvas');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      /* Key data points [hour, value 0-1] */
+      const circadianKnots = [
+        [0,.15],[2,.08],[4,.05],[6,.30],[7.5,.58],[9,.90],
+        [11,.85],[12,.72],[14,.60],[16,.82],[18,.88],[20,.68],
+        [21,.52],[22.5,.28],[23.5,.18],[24,.15]
+      ];
+      const adenosineKnots = [
+        [0,.60],[3,.35],[5,.18],[7,.08],[9,.28],[11,.42],
+        [13,.54],[15,.64],[17,.74],[19,.82],[21,.88],[22.5,.92],
+        [24,.70]
+      ];
+
+      /* Interpolate knots into dense point array */
+      function buildCurve(knots, steps){
+        const pts=[];
+        for(let i=0;i<steps;i++){
+          const t=i/(steps-1)*24;
+          // find surrounding knots
+          let lo=knots[0], hi=knots[knots.length-1];
+          for(let k=0;k<knots.length-1;k++){
+            if(t>=knots[k][0]&&t<=knots[k+1][0]){ lo=knots[k]; hi=knots[k+1]; break; }
+          }
+          const span=hi[0]-lo[0]||1;
+          const frac=(t-lo[0])/span;
+          // cubic ease for smoother interpolation
+          const s=frac*frac*(3-2*frac);
+          pts.push(lo[1]+(hi[1]-lo[1])*s);
+        }
+        return pts;
+      }
+
+      const STEPS = 300;
+      const circPts = buildCurve(circadianKnots, STEPS);
+      const adePts  = buildCurve(adenosineKnots,  STEPS);
+
+      let progress  = 0;
+      let animating = false;
+      let started   = false;
+
+      function draw(prog){
+        const W=canvas.width, H=canvas.height;
+        const ml=52, mr=20, mt=24, mb=46;
+        const pw=W-ml-mr, ph=H-mt-mb;
+
+        ctx.clearRect(0,0,W,H);
+
+        /* Grid lines */
+        ctx.strokeStyle='rgba(200,184,255,0.07)';
+        ctx.lineWidth=1;
+        for(let v=0;v<=1;v+=.25){
+          const y=mt+ph*(1-v);
+          ctx.beginPath(); ctx.moveTo(ml,y); ctx.lineTo(ml+pw,y); ctx.stroke();
+        }
+        /* Hour markers */
+        [0,6,12,18,24].forEach(h=>{
+          const x=ml+(h/24)*pw;
+          ctx.beginPath(); ctx.moveTo(x,mt); ctx.lineTo(x,mt+ph); ctx.stroke();
+        });
+
+        /* Sleep / wake zone shading */
+        const wakeStart=ml+(7/24)*pw, wakeEnd=ml+(22/24)*pw;
+        ctx.fillStyle='rgba(255,209,102,0.04)';
+        ctx.fillRect(wakeStart,mt,wakeEnd-wakeStart,ph);
+        ctx.fillStyle='rgba(200,184,255,0.04)';
+        ctx.fillRect(ml,mt,wakeStart-ml,ph);
+        ctx.fillRect(wakeEnd,mt,ml+pw-wakeEnd,ph);
+
+        /* Zone labels */
+        ctx.font='500 11px "DM Sans",system-ui,sans-serif';
+        ctx.fillStyle='rgba(200,184,255,0.28)';
+        ctx.textAlign='center';
+        ctx.fillText('SLEEP',ml+(3.5/24)*pw,mt+14);
+        ctx.fillStyle='rgba(255,209,102,0.28)';
+        ctx.fillText('WAKEFULNESS',ml+(14.5/24)*pw,mt+14);
+        ctx.fillStyle='rgba(200,184,255,0.28)';
+        ctx.fillText('SLEEP',ml+(23/24)*pw,mt+14);
+
+        /* Hour axis labels */
+        ctx.fillStyle='rgba(244,240,255,0.35)';
+        ctx.font='500 10px "DM Sans",system-ui,sans-serif';
+        ['12am','6am','12pm','6pm','12am'].forEach((lbl,i)=>{
+          ctx.fillText(lbl,ml+(i*6/24)*pw,mt+ph+18);
+        });
+
+        /* Y-axis label */
+        ctx.save();
+        ctx.translate(13,mt+ph/2);
+        ctx.rotate(-Math.PI/2);
+        ctx.textAlign='center';
+        ctx.fillStyle='rgba(244,240,255,0.28)';
+        ctx.font='500 10px "DM Sans",system-ui,sans-serif';
+        ctx.fillText('Level',0,0);
+        ctx.restore();
+
+        /* Helper to draw a curve up to prog */
+        function drawCurve(pts, color, glowColor, lineW){
+          const count=Math.floor(pts.length*prog);
+          if(count<2) return;
+
+          /* Glow pass */
+          ctx.save();
+          ctx.shadowColor=glowColor;
+          ctx.shadowBlur=10;
+          ctx.strokeStyle=color;
+          ctx.lineWidth=lineW+1;
+          ctx.lineCap='round';
+          ctx.lineJoin='round';
+          ctx.beginPath();
+          for(let i=0;i<count;i++){
+            const x=ml+(i/(STEPS-1))*pw;
+            const y=mt+ph*(1-pts[i]);
+            i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+          }
+          ctx.stroke();
+          ctx.restore();
+
+          /* Main line */
+          ctx.strokeStyle=color;
+          ctx.lineWidth=lineW;
+          ctx.lineCap='round';
+          ctx.lineJoin='round';
+          ctx.beginPath();
+          for(let i=0;i<count;i++){
+            const x=ml+(i/(STEPS-1))*pw;
+            const y=mt+ph*(1-pts[i]);
+            i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+          }
+          ctx.stroke();
+
+          /* Dot at leading edge */
+          if(prog<1 && count>1){
+            const lx=ml+((count-1)/(STEPS-1))*pw;
+            const ly=mt+ph*(1-pts[count-1]);
+            ctx.beginPath();
+            ctx.arc(lx,ly,4,0,Math.PI*2);
+            ctx.fillStyle=color;
+            ctx.fill();
+          }
+        }
+
+        ctx.globalAlpha=0.9;
+        drawCurve(adePts,  '#c8b8ff','rgba(200,184,255,0.6)', 2.5);
+        drawCurve(circPts, '#ffd166','rgba(255,209,102,0.6)', 2.5);
+        ctx.globalAlpha=1;
+      }
+
+      function animate(){
+        progress=Math.min(progress+0.008,1);
+        draw(progress);
+        if(progress<1) requestAnimationFrame(animate);
+      }
+
+      /* Trigger on scroll */
+      new IntersectionObserver(entries=>{
+        if(entries[0].isIntersecting && !started){
+          started=true;
+          animating=true;
+          animate();
+        }
+      },{threshold:0.3}).observe(document.getElementById('two-process-wrap'));
+
+      /* Resize handler — redraw at new size */
+      function resize(){
+        const W=canvas.parentElement.clientWidth - 32;
+        canvas.width  = W;
+        canvas.height = Math.round(W*0.245);
+        draw(progress);
+      }
+      window.addEventListener('resize',resize,{passive:true});
+      resize();
+    })();
+
+    /* ================================================================
+       SLEEP STAGE CYCLE BAR — click to expand detail panel
+    ================================================================ */
+    (function initStageCycle(){
+      const segments = document.querySelectorAll('.stage-seg');
+      const panel    = document.getElementById('stage-detail-panel');
+      let activeStage = null;
+
+      segments.forEach(seg=>{
+        seg.addEventListener('click',()=>{
+          const stage = seg.dataset.stage;
+
+          /* Clicking active stage closes it */
+          if(activeStage===stage){
+            panel.classList.remove('open');
+            document.querySelectorAll('.stage-detail-inner').forEach(d=>d.classList.remove('active'));
+            segments.forEach(s=>{ s.classList.remove('active'); s.setAttribute('aria-pressed','false'); });
+            activeStage=null;
+            return;
+          }
+
+          /* Hide all details */
+          document.querySelectorAll('.stage-detail-inner').forEach(d=>d.classList.remove('active'));
+          segments.forEach(s=>{ s.classList.remove('active'); s.setAttribute('aria-pressed','false'); });
+
+          /* Show selected */
+          const detailEl = document.getElementById('detail-'+stage);
+          if(detailEl){
+            detailEl.classList.add('active');
+            panel.classList.add('open');
+            seg.classList.add('active');
+            seg.setAttribute('aria-pressed','true');
+            activeStage=stage;
+
+            /* Scroll panel into view on mobile */
+            setTimeout(()=>{
+              if(window.innerWidth<700) panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+            },200);
+          }
+        });
+      });
+    })();
+
+    /* ================================================================
+       MEMORY SECTION — SVG arrow draw-in + split panel reveal
+    ================================================================ */
+    (function initMemory(){
+
+      /* ── Animate SVG arrows sequentially when diagram enters view ── */
+      const diagramWrap = document.getElementById('mem-diagram-wrap');
+      if (diagramWrap) {
+        new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting) return;
+
+          /* Stagger each arrow 400 ms apart */
+          ['arr1','arr2','arr3'].forEach((id, i) => {
+            setTimeout(() => {
+              const el = document.getElementById(id);
+              if (el) el.classList.add('draw');
+            }, i * 420);
+          });
+
+        }, { threshold: 0.35 }).observe(diagramWrap);
+      }
+
+      /* ── NREM vs REM split panels open on scroll ── */
+      const splitWrap = document.getElementById('nrem-rem-wrap');
+      if (splitWrap) {
+        new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting) return;
+          /* NREM side opens first, REM 300 ms later */
+          const nremBody = document.getElementById('split-body-nrem');
+          const remBody  = document.getElementById('split-body-rem');
+          if (nremBody) nremBody.classList.add('open');
+          setTimeout(() => { if (remBody) remBody.classList.add('open'); }, 300);
+        }, { threshold: 0.25 }).observe(splitWrap);
+      }
+
+    })();
+
+    /* ================================================================
+       BRAIN WAVE VISUALIZER
+       Live-scrolling EEG canvas with 6 stage modes.
+       Auto-cycles every 4 s unless user locks a stage by clicking.
+    ================================================================ */
+    (function initBrainWave(){
+      const canvas  = document.getElementById('bw-canvas');
+      if (!canvas) return;
+      const ctx     = canvas.getContext('2d');
+      const tabs    = document.querySelectorAll('.bw-tab');
+      const autoLbl = document.getElementById('bw-auto-label');
+
+      /* Stage definitions */
+      const STAGES = {
+        beta:     { name:'Awake / Alert',          wave:'Beta',                    freq:'13–30 Hz',   color:'#ffd166', desc:'The signature of active thinking and focus. High-frequency, low-amplitude oscillations generated across the cortex. Inhibited during sleep by serotonin and noradrenaline.', cycleAmp:7,  cycleFreq:0.55, speed:5.5, mode:'sine' },
+        alpha:    { name:'Awake / Relaxed',         wave:'Alpha',                   freq:'8–12 Hz',    color:'#7eb8f7', desc:'Appears when you close your eyes and relax. The "bridge" between wakefulness and sleep — the first pattern disrupted as you drift off.', cycleAmp:13, cycleFreq:0.36, speed:4.0, mode:'sine' },
+        theta:    { name:'NREM 1 — Light Sleep',    wave:'Theta',                   freq:'4–7 Hz',     color:'#60a5fa', desc:'Slow, rolling waves marking the transition from wakefulness. Hypnic jerks are common here. Theta also appears during deep meditation and REM sleep.', cycleAmp:19, cycleFreq:0.20, speed:3.0, mode:'sine' },
+        spindles: { name:'NREM 2 — True Sleep',     wave:'Sleep Spindles + K-complexes', freq:'12–16 Hz bursts', color:'#4ade80', desc:'Bursts of 12–16 Hz activity generated by the thalamus. Spindles gate external stimuli so you stay asleep, and their density directly predicts next-day memory recall.', cycleAmp:21, cycleFreq:0.34, speed:4.0, mode:'spindle' },
+        delta:    { name:'NREM 3 — Deep Sleep',     wave:'Delta',                   freq:'0.5–4 Hz',   color:'#c8b8ff', desc:'High-amplitude, very slow waves — the deepest sleep. Growth hormone floods the body. Memories transfer from hippocampus to neocortex. Hardest stage to wake from.', cycleAmp:38, cycleFreq:0.08, speed:1.8, mode:'sine' },
+        rem:      { name:'REM — Paradoxical Sleep', wave:'Beta-like (desynchronized)',freq:'~15–30 Hz', color:'#f97316', desc:'Brain activity nearly identical to waking — yet the body is paralyzed (atonia). Primary stage for dreaming, emotional memory processing, and procedural skill consolidation.', cycleAmp:9,  cycleFreq:0.48, speed:5.0, mode:'rem'  },
+      };
+      const ORDER = ['beta','alpha','theta','spindles','delta','rem'];
+
+      let currentStage = 'beta';
+      let locked       = false;       // true when user has clicked a tab
+      let phase        = 0;
+      let spindleEnv   = 0;
+      let autoTimer    = null;
+      let rafId        = null;
+
+      /* ── Resize canvas to container width ── */
+      function resize(){
+        const W = canvas.parentElement.clientWidth;
+        canvas.width  = W;
+        canvas.height = Math.round(W * 0.155);
+      }
+      window.addEventListener('resize', resize, { passive:true });
+      resize();
+
+      /* ── Update info chips ── */
+      function updateChips(key){
+        const s = STAGES[key];
+        document.getElementById('bw-chip-stage').textContent = s.name;
+        document.getElementById('bw-chip-wave').textContent  = s.wave;
+        document.getElementById('bw-chip-freq').textContent  = s.freq;
+        document.getElementById('bw-chip-desc').textContent  = s.desc;
+      }
+
+      /* ── Update tab highlight ── */
+      function setTab(key){
+        tabs.forEach(t => {
+          const active = t.dataset.stage === key;
+          t.classList.toggle('active', active);
+          t.setAttribute('aria-selected', active);
+          if (active) {
+            t.style.background   = STAGES[key].color;
+            t.style.borderColor  = STAGES[key].color;
+            t.style.color        = '#0a0f2e';
+          } else {
+            t.style.background  = '';
+            t.style.borderColor = '';
+            t.style.color       = '';
+          }
+        });
+      }
+
+      /* ── Switch stage ── */
+      function switchStage(key, userLocked){
+        currentStage = key;
+        phase        = 0;
+        spindleEnv   = 0;
+        if (userLocked !== undefined) locked = userLocked;
+        setTab(key);
+        updateChips(key);
+        if (locked) {
+          clearInterval(autoTimer);
+          autoLbl.textContent = 'Locked on: ' + STAGES[key].name + ' — click another tab to switch';
+        } else {
+          autoLbl.textContent = 'Auto-cycling through all stages — click any tab to lock';
+        }
+      }
+
+      /* ── Tab clicks ── */
+      tabs.forEach(t => {
+        t.addEventListener('click', () => switchStage(t.dataset.stage, true));
+      });
+
+      /* ── Auto-cycle ── */
+      function startAutoCycle(){
+        let idx = 0;
+        switchStage(ORDER[idx], false);
+        autoTimer = setInterval(() => {
+          if (locked) return;
+          idx = (idx + 1) % ORDER.length;
+          switchStage(ORDER[idx], false);
+        }, 4000);
+      }
+
+      /* ── Draw one frame ── */
+      function drawFrame(){
+        const W  = canvas.width;
+        const H  = canvas.height;
+        const s  = STAGES[currentStage];
+        const cy = H / 2;
+
+        /* Dark background */
+        ctx.fillStyle = '#080c20';
+        ctx.fillRect(0, 0, W, H);
+
+        /* Subtle centre baseline */
+        ctx.strokeStyle = 'rgba(200,184,255,0.08)';
+        ctx.lineWidth   = 1;
+        ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
+
+        /* Amplitude & frequency tick labels (faint) */
+        ctx.fillStyle   = 'rgba(200,184,255,0.18)';
+        ctx.font        = `500 10px 'DM Sans',system-ui,sans-serif`;
+        ctx.textAlign   = 'left';
+        ctx.fillText(s.freq, 10, 14);
+
+        /* --- Generate waveform path --- */
+        /* We draw point-by-point across the width, with phase offset
+           so the wave appears to scroll (phase increments each frame). */
+        ctx.save();
+        ctx.shadowColor = s.color;
+        ctx.shadowBlur  = 12;
+        ctx.strokeStyle = s.color;
+        ctx.lineWidth   = 2.2;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
+        ctx.beginPath();
+
+        for (let x = 0; x <= W; x++) {
+          const t = (x / W) * 8 + phase;   // 8 = visible "window" in wave-cycles
+          let y;
+
+          if (s.mode === 'spindle') {
+            /* Spindles: carrier wave modulated by a slow envelope */
+            const env     = (Math.sin(t * 0.28 * Math.PI * 2) + 1) / 2;   // 0–1 envelope
+            const carrier = Math.sin(t * s.cycleFreq * Math.PI * 2);
+            y = cy + carrier * env * s.cycleAmp;
+            /* Add small K-complex bump every envelope cycle */
+            if (env > 0.95) y -= 6 * Math.sin(t * 0.8 * Math.PI * 2);
+
+          } else if (s.mode === 'rem') {
+            /* REM: fast primary wave + low-freq sway + micro-noise */
+            const primary = Math.sin(t * s.cycleFreq * Math.PI * 2) * s.cycleAmp;
+            const sway    = Math.sin(t * 0.07  * Math.PI * 2) * 4;
+            const noise   = Math.sin(t * 1.1   * Math.PI * 2) * 2;
+            y = cy + primary + sway + noise;
+
+          } else {
+            /* Sine for beta, alpha, theta, delta */
+            y = cy + Math.sin(t * s.cycleFreq * Math.PI * 2) * s.cycleAmp;
+          }
+
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+
+        ctx.stroke();
+        ctx.restore();
+
+        /* Left-edge fade-out so wave appears to emerge from left */
+        const fade = ctx.createLinearGradient(0,0,60,0);
+        fade.addColorStop(0, '#080c20');
+        fade.addColorStop(1, 'rgba(8,12,32,0)');
+        ctx.fillStyle = fade;
+        ctx.fillRect(0, 0, 60, H);
+
+        /* Advance phase — controls scroll speed */
+        phase += s.speed * 0.006;
+
+        rafId = requestAnimationFrame(drawFrame);
+      }
+
+      /* ── Start when scrolled into view ── */
+      new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          if (!rafId) {
+            startAutoCycle();
+            drawFrame();
+          }
+        } else {
+          /* Pause when off-screen */
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        }
+      }, { threshold: 0.2 }).observe(document.getElementById('bw-wrap'));
+
+    })();
+
+    /* ================================================================
+       DISORDERS — flip cards (touch toggle + keyboard)
+    ================================================================ */
+    (function initFlipCards(){
+      const cards = document.querySelectorAll('.flip-card');
+
+      cards.forEach(card => {
+        /* Toggle flip on click (works for both touch and mouse).
+           On non-touch screens CSS :hover already shows the back;
+           clicking additionally locks/unlocks the flipped state.    */
+        card.addEventListener('click', () => {
+          card.classList.toggle('flipped');
+          const isFlipped = card.classList.contains('flipped');
+          /* Update aria on front/back */
+          const front = card.querySelector('.flip-front');
+          const back  = card.querySelector('.flip-back');
+          if (front) front.setAttribute('aria-hidden', isFlipped  ? 'true'  : 'false');
+          if (back)  back.setAttribute('aria-hidden',  isFlipped  ? 'false' : 'true');
+        });
+
+        /* Keyboard: Enter / Space to flip */
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+          /* Escape to unflip */
+          if (e.key === 'Escape') {
+            card.classList.remove('flipped');
+            card.querySelector('.flip-front')?.setAttribute('aria-hidden','false');
+            card.querySelector('.flip-back')?.setAttribute('aria-hidden','true');
+          }
+        });
+      });
+    })();
+
+    /* ================================================================
+       MENTAL HEALTH — neurotransmitter card stagger + amygdala toggle
+    ================================================================ */
+    (function initMentalHealth(){
+
+      /* ── Staggered neurotransmitter cards ── */
+      const neuroGrid  = document.getElementById('neuro-grid');
+      const neuroCards = neuroGrid ? neuroGrid.querySelectorAll('.neuro-card') : [];
+
+      if (neuroGrid) {
+        new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting) return;
+          neuroCards.forEach((card, i) => {
+            setTimeout(() => card.classList.add('visible'), i * 110);
+          });
+        }, { threshold: 0.15 }).observe(neuroGrid);
+      }
+
+      /* ── Amygdala / PFC toggle ── */
+      const btnRested   = document.getElementById('btn-rested');
+      const btnDeprived = document.getElementById('btn-deprived');
+      const connFill    = document.getElementById('conn-fill');
+      const connStatus  = document.getElementById('conn-status');
+      const amygBadge   = document.getElementById('amyg-badge');
+      const pfcBadge    = document.getElementById('pfc-badge');
+      const amygCaption = document.getElementById('amyg-caption');
+
+      if (!btnRested) return;
+
+      const STATES = {
+        rested: {
+          fillW:   '88%',
+          fillBg:  '#4ade80',
+          status:  'STRONG REGULATION',
+          statusC: '#4ade80',
+          amygTxt: 'Normal Reactivity',
+          amygBg:  'rgba(74,222,128,0.15)', amygC: '#4ade80',
+          pfcTxt:  'Active & Effective',
+          pfcBg:   'rgba(74,222,128,0.15)',  pfcC: '#4ade80',
+          caption: 'With adequate sleep, the prefrontal cortex maintains strong inhibitory control over the amygdala — you can regulate your emotional responses effectively.',
+        },
+        deprived: {
+          fillW:   '12%',
+          fillBg:  '#ef4444',
+          status:  'SEVERED — CONTROL LOST',
+          statusC: '#ef4444',
+          amygTxt: '↑ 60% More Reactive',
+          amygBg:  'rgba(239,68,68,0.20)', amygC: '#fca5a5',
+          pfcTxt:  'Weakened — Off-line',
+          pfcBg:   'rgba(239,68,68,0.15)',  pfcC: '#fca5a5',
+          caption: 'Sleep loss severs the top-down connection between the PFC and amygdala. Without this brake, the amygdala fires up to 60% more strongly to negative stimuli — leaving you emotionally reactive and impulsive.',
+        },
+      };
+
+      function applyState(key) {
+        const s = STATES[key];
+        connFill.style.width      = s.fillW;
+        connFill.style.background = s.fillBg;
+        connStatus.textContent    = s.status;
+        connStatus.style.color    = s.statusC;
+        amygBadge.textContent     = s.amygTxt;
+        amygBadge.style.background= s.amygBg;
+        amygBadge.style.color     = s.amygC;
+        pfcBadge.textContent      = s.pfcTxt;
+        pfcBadge.style.background = s.pfcBg;
+        pfcBadge.style.color      = s.pfcC;
+        amygCaption.textContent   = s.caption;
+
+        /* Button styles */
+        btnRested.classList.toggle('active-rested',    key === 'rested');
+        btnDeprived.classList.toggle('active-deprived', key === 'deprived');
+        btnRested.style.color   = key === 'rested'   ? '' : 'rgba(244,240,255,.45)';
+        btnDeprived.style.color = key === 'deprived' ? '' : 'rgba(244,240,255,.45)';
+        btnRested.setAttribute('aria-pressed',   key === 'rested'   ? 'true' : 'false');
+        btnDeprived.setAttribute('aria-pressed', key === 'deprived' ? 'true' : 'false');
+      }
+
+      btnRested.addEventListener('click',   () => applyState('rested'));
+      btnDeprived.addEventListener('click', () => applyState('deprived'));
+
+      /* Start in rested state */
+      applyState('rested');
+
+    })();
+
+    /* ============================================================
+       CBT-I TABS
+       ============================================================ */
+    (() => {
+      const tabs   = document.querySelectorAll('.cbt-tab');
+      const panels = document.querySelectorAll('.cbt-panel');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+          panels.forEach(p => p.classList.remove('active'));
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected','true');
+          const panel = document.getElementById('tab-' + tab.dataset.tab);
+          if (panel) panel.classList.add('active');
+        });
+      });
+    })();
+
+    /* ============================================================
+       CBT-I CHECKLIST — scroll-reveal + toggle
+       ============================================================ */
+    (() => {
+      const items = document.querySelectorAll('.cbt-check-item');
+      const tallyText = document.getElementById('cbtTallyText');
+      const tallyFill = document.getElementById('cbtTallyFill');
+      const total = items.length;
+
+      /* Scroll reveal with stagger */
+      const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(items).indexOf(entry.target);
+            setTimeout(() => entry.target.classList.add('reveal-check'), idx * 60);
+            revealObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      items.forEach(i => revealObs.observe(i));
+
+      function updateTally() {
+        const checked = document.querySelectorAll('.cbt-check-item.checked').length;
+        tallyText.textContent = `${checked} / ${total} habits`;
+        tallyFill.style.width = `${(checked / total) * 100}%`;
+      }
+
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          item.classList.toggle('checked');
+          updateTally();
+        });
+        item.addEventListener('keydown', e => {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); item.click(); }
+        });
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('role', 'checkbox');
+        item.setAttribute('aria-checked', 'false');
+      });
+    })();
+
+    /* ============================================================
+       SLEEP SCORE QUIZ
+       ============================================================ */
+    (() => {
+      const questions = document.querySelectorAll('.cbt-question');
+      const result    = document.getElementById('cbtResult');
+      const resLabel  = document.getElementById('cbtResultLabel');
+      const resText   = document.getElementById('cbtResultText');
+      const answers   = {};
+
+      const outcomes = [
+        { min:1,  max:1,  cls:'res-excellent',  label:'Excellent',  text:'Your sleep habits are well-aligned with evidence-based recommendations. Keep it up — consistent habits are the foundation of long-term sleep health.' },
+        { min:0,  max:0,  cls:'res-moderate',   label:'Moderate',   text:"You're close — a few targeted changes could meaningfully improve your sleep quality and daytime energy." },
+        { min:-2, max:-1, cls:'res-needs-work',  label:'Needs Work', text:'Several habits are disrupting your sleep quality. The CBT-I techniques above can help — start with stimulus control and cutting caffeine after 2 PM.' },
+        { min:-4, max:-3, cls:'res-at-risk',     label:'At Risk',    text:'Your sleep hygiene puts you at significant risk for chronic sleep problems. Consider speaking with a sleep specialist or trying a structured CBT-I program.' },
+      ];
+
+      function checkAllAnswered() {
+        if (Object.keys(answers).length < questions.length) return;
+        let score = 0;
+        questions.forEach(q => {
+          const ans = answers[q.dataset.q];
+          score += ans === 'yes' ? parseInt(q.dataset.yes) : parseInt(q.dataset.no);
+        });
+        const outcome = outcomes.find(o => score >= o.min && score <= o.max) || outcomes[outcomes.length - 1];
+        result.className = 'cbt-quiz-result show ' + outcome.cls;
+        resLabel.textContent = outcome.label;
+        resText.textContent  = outcome.text;
+        result.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      }
+
+      questions.forEach(q => {
+        q.querySelectorAll('.cbt-q-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            q.querySelectorAll('.cbt-q-btn').forEach(b => b.classList.remove('selected-yes','selected-no'));
+            btn.classList.add(btn.dataset.answer === 'yes' ? 'selected-yes' : 'selected-no');
+            answers[q.dataset.q] = btn.dataset.answer;
+            checkAllAnswered();
+          });
+        });
+      });
+
+    })();
+
+    /* ============================================================
+       CHECKLIST aria-checked sync
+       ============================================================ */
+    (() => {
+      document.querySelectorAll('.cbt-check-item').forEach(item => {
+        const obs = new MutationObserver(() => {
+          item.setAttribute('aria-checked', item.classList.contains('checked') ? 'true' : 'false');
+        });
+        obs.observe(item, { attributes:true, attributeFilter:['class'] });
+      });
+    })();
+
+    /* ============================================================
+       REFERENCES — staggered scroll reveal
+       ============================================================ */
+    (() => {
+      const refs = document.querySelectorAll('[data-ref]');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(refs).indexOf(entry.target);
+            setTimeout(() => entry.target.classList.add('visible'), idx * 70);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      refs.forEach(r => obs.observe(r));
+    })();
+
+    /* ============================================================
+       DEPRIVATION TIMELINE — self-drawing spine + node reveals
+       ============================================================ */
+    (() => {
+      const timeline = document.getElementById('depTimeline');
+      const spineLine = document.getElementById('depSpineLine');
+      const spineSvg  = document.getElementById('depSpine');
+      const nodes     = document.querySelectorAll('[data-dep-node]');
+
+      if (!timeline || !spineLine || !nodes.length) return;
+
+      /* Size the spine SVG to match the nodes column height */
+      function sizeSpine() {
+        const nodesCol = document.getElementById('depNodes');
+        if (!nodesCol) return;
+        const h = nodesCol.getBoundingClientRect().height;
+        spineSvg.setAttribute('height', h);
+        spineSvg.setAttribute('viewBox', `0 0 4 ${h}`);
+        spineLine.setAttribute('y2', spineLine.getAttribute('y2') || 0);
+      }
+      sizeSpine();
+      window.addEventListener('resize', sizeSpine);
+
+      /* Draw spine line as section scrolls into view */
+      let spineFullH = 0;
+      let spineAnimating = false;
+
+      const spineObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !spineAnimating) {
+            spineAnimating = true;
+            const nodesCol = document.getElementById('depNodes');
+            spineFullH = nodesCol ? nodesCol.getBoundingClientRect().height : 800;
+            animateSpine(0, spineFullH, 1600);
+          }
+        });
+      }, { threshold: 0.05 });
+      spineObserver.observe(timeline);
+
+      function animateSpine(from, to, duration) {
+        const start = performance.now();
+        function step(now) {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          const cur = from + (to - from) * ease;
+          spineLine.setAttribute('y2', cur);
+          spineLine.classList.add('spine-drawn');
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      /* Staggered node reveals */
+      const nodeObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(nodes).indexOf(entry.target);
+            setTimeout(() => entry.target.classList.add('visible'), idx * 120);
+            nodeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      nodes.forEach(n => nodeObserver.observe(n));
+    })();
+
+  </script>
+
+</body>
+</html>
