@@ -1344,6 +1344,68 @@
        ============================================================ */
     #references { background:#0d1117; padding:var(--section-pad-v) var(--section-pad-h); }
 
+    /* ── Team Section ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .team-card {
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      border-radius: 20px;
+      padding: 36px 28px 32px;
+      text-align: center;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      transition: transform var(--ease), box-shadow var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .team-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(200,184,255,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--glow-md), 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .team-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-purple), #4a2fa0);
+      border: 2px solid var(--c-lavender-40);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--c-lavender);
+      margin: 0 auto 20px;
+      box-shadow: var(--glow-sm);
+    }
+    .team-name {
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+      color: var(--c-off-white);
+    }
+    .team-role {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+      margin-bottom: 16px;
+    }
+    .team-desc {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: rgba(244,240,255,0.75);
+      margin-bottom: 0;
+    }
+
     .ref-list {
       list-style:none; padding:0; margin:0;
       display:flex; flex-direction:column; gap:12px;
@@ -2738,7 +2800,53 @@
 
       </div><!-- /container -->
     </section>
-    <!-- Wave divider: improve → references -->
+    <!-- Wave divider: improve → team -->
+    <div class="wave-divider" aria-hidden="true" style="background:var(--c-navy);">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,44 C360,0 1080,64 1440,20 L1440,64 L0,64 Z" fill="#0a0f2e"/>
+      </svg>
+    </div>
+
+    <section id="team" class="section-shell bg-navy" aria-labelledby="team-title">
+      <div class="container">
+        <h2 class="section-title reveal" id="team-title">Meet the Team</h2>
+        <p class="section-lead reveal">Four students, one shared curiosity about sleep — here's who brought each part of this project to life.</p>
+
+        <div class="team-grid reveal">
+
+          <div class="team-card">
+            <div class="team-avatar" aria-hidden="true">H</div>
+            <h3 class="team-name">Hiya</h3>
+            <div class="team-role">Sleep &amp; Mental Health</div>
+            <p class="team-desc">Hiya covered how sleep affects mental health, focusing on the links between sleep loss and conditions like anxiety and depression.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar" aria-hidden="true">I</div>
+            <h3 class="team-name">Ibrahim</h3>
+            <div class="team-role">Website &amp; Sleep Science</div>
+            <p class="team-desc">Ibrahim built the website and covered the basics of sleep science, including the stages, the cycles, and what your brain is actually doing each night.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar" aria-hidden="true">Y</div>
+            <h3 class="team-name">Yashvy</h3>
+            <div class="team-role">Sleep Disorders</div>
+            <p class="team-desc">Yashvy researched sleep disorders like insomnia, sleep apnea, and narcolepsy, and what the research says about each one.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar" aria-hidden="true">A</div>
+            <h3 class="team-name">Aneri</h3>
+            <div class="team-role">Memory &amp; CBT-I Treatment</div>
+            <p class="team-desc">Aneri covered how sleep affects memory and put together the CBT-I section on practical ways to actually improve your sleep.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Wave divider: team → references -->
     <div class="wave-divider" aria-hidden="true" style="background:var(--c-navy);">
       <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0,44 C360,0 1080,64 1440,20 L1440,64 L0,64 Z" fill="#0d1117"/>
